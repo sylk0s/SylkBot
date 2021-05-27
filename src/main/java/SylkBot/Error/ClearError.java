@@ -40,6 +40,7 @@ public class ClearError implements Error {
         error.setTitle(errorTitle);
         error.setDescription(errorDescription);
         event.getChannel().sendMessage(error.build()).queue();
+        error.clear();
     }
 
 }

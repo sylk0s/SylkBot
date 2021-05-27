@@ -1,6 +1,7 @@
 package SylkBot.Commands;
 
 import SylkBot.Main;
+import SylkBot.Permissons.PermType;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -11,6 +12,9 @@ public abstract class Command extends ListenerAdapter {
     public abstract String getHelpInfo();
     public abstract String getTrigger();
     public abstract void run(String[] args, GuildMessageReceivedEvent event);
+    public abstract PermType getPermLevel();
+
+    //todo add in perms?
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
