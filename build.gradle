@@ -28,6 +28,8 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.0.1'
     // https://mvnrepository.com/artifact/commons-logging/commons-logging
     compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    // https://github.com/psgs/WolframAPI/releases
+    //compile group: 'com.wolfram.alpha', name: 'WolframAlpha', version:'1.1'
 }
 
 compileJava.options.encoding = 'UTF-8'
