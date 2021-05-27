@@ -25,6 +25,8 @@ public class Help extends Command {
         return PermType.RESTRICTED;
     }
 
+    //todo rewrite this so i can be lazy
+
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if (args.length < 2) {

@@ -15,6 +15,7 @@ sourceCompatibility = targetCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -30,6 +31,8 @@ dependencies {
     compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
     // https://github.com/psgs/WolframAPI/releases
     //compile group: 'com.wolfram.alpha', name: 'WolframAlpha', version:'1.1'
+    //https://github.com/SparklingComet/java-mojang-api
+    compile 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
 }
 
 compileJava.options.encoding = 'UTF-8'

@@ -3,6 +3,9 @@ package SylkBot;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
+import SylkBot.Commands.Fun.Hello;
+import SylkBot.Commands.Fun.Say;
+import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -23,16 +26,21 @@ public class Main {
         jda = (JDA) JDABuilder.createDefault(botToken).build();
         jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
 
-        Clear clear = new Clear();
-        Info info = new Info();
-        Help help = new Help();
+        //todo make this cleaner
 
-        CommandList.put(clear.getTrigger(), clear);
-        CommandList.put(info.getTrigger(), info);
-        CommandList.put(help.getTrigger(), help);
+        register(new Clear());
+        register(new Info());
+        register(new Help());
+        register(new Hello());
+        register(new Say());
+        register(new UUID());
 
         for(String key: CommandList.keySet()) {
             jda.addEventListener(CommandList.get(key));
         }
+    }
+
+    public static void register(Command command) {
+        CommandList.put(command.getTrigger(), command);
     }
 }
