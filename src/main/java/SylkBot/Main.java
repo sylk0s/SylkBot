@@ -5,6 +5,7 @@ import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
 import SylkBot.Commands.Fun.Hello;
 import SylkBot.Commands.Fun.Say;
+import SylkBot.Commands.Minecraft.History;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
 import net.dv8tion.jda.api.JDA;
@@ -34,6 +35,7 @@ public class Main {
         register(new Hello());
         register(new Say());
         register(new UUID());
+        register(new History());
 
         for(String key: CommandList.keySet()) {
             jda.addEventListener(CommandList.get(key));
