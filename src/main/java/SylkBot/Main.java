@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class Main {
 
     public static JDA jda;
-    private final static String botToken = ""; // REMOVE THIS WHENEVER PUSHING
+    private final static String botToken = "NzY4ODUzNjM3ODk5NDg1MjM2.X5Ggvw.ZCKgYNrXlvFQ5ZNf0QCBrv0GmO4"; // REMOVE THIS WHENEVER PUSHING
     public static String prefix = ".";
 
     public static HashMap<String, Command> CommandList = new HashMap<>();
