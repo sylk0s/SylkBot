@@ -26,6 +26,7 @@ public class Help extends Command {
     }
 
     //todo rewrite this so i can be lazy
+    //also note i need to go fix the ones that work properly now before i fix the ones later
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {

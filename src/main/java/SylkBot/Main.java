@@ -6,6 +6,7 @@ import SylkBot.Commands.Core.Info;
 import SylkBot.Commands.Fun.Hello;
 import SylkBot.Commands.Fun.Say;
 import SylkBot.Commands.Minecraft.History;
+import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
 import net.dv8tion.jda.api.JDA;
@@ -18,7 +19,7 @@ import java.util.HashMap;
 public class Main {
 
     public static JDA jda;
-    private final static String botToken = "NzY4ODUzNjM3ODk5NDg1MjM2.X5Ggvw.ZCKgYNrXlvFQ5ZNf0QCBrv0GmO4"; // REMOVE THIS WHENEVER PUSHING
+    private final static String botToken = ""; // REMOVE THIS WHENEVER PUSHING
     public static String prefix = ".";
 
     public static HashMap<String, Command> CommandList = new HashMap<>();
@@ -36,6 +37,7 @@ public class Main {
         register(new Say());
         register(new UUID());
         register(new History());
+        register(new Skin());
 
         for(String key: CommandList.keySet()) {
             jda.addEventListener(CommandList.get(key));
