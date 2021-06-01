@@ -21,6 +21,9 @@ public class Hello extends Command {
     }
 
     @Override
+    public boolean hasNoArgs() { return true; }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         event.getChannel().sendMessage("hello " + event.getAuthor().getAsMention()).queue();
     }

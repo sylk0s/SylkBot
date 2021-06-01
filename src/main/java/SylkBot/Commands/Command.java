@@ -1,5 +1,6 @@
 package SylkBot.Commands;
 
+import SylkBot.Error.NoArgsError;
 import SylkBot.Main;
 import SylkBot.Permissons.PermType;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -13,6 +14,7 @@ public abstract class Command extends ListenerAdapter {
     public abstract String getTrigger();
     public abstract PermType getPermLevel();
     public abstract void run(String[] args, GuildMessageReceivedEvent event);
+    public abstract boolean hasNoArgs();
 
     //todo add in perms?
 
@@ -20,7 +22,12 @@ public abstract class Command extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
         if (args[0].equalsIgnoreCase(Main.prefix + this.getTrigger())) {
-            run(args, event);
+            if (args.length < 2 && !hasNoArgs()) {
+                NoArgsError error = new NoArgsError();
+                error.outputError(event);
+            } else {
+                run(args, event);
+            }
         }
     }
 }

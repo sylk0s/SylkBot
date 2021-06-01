@@ -21,6 +21,9 @@ public class Say extends Command {
     }
 
     @Override
+    public boolean hasNoArgs() { return false; }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         String message = " ";
         for(int i=1; i < args.length; i++) { message = message + args[i] + " "; }

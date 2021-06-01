@@ -31,10 +31,13 @@ public class Clear extends Command {
     }
 
     @Override
+    public boolean hasNoArgs() { return false; }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if (args.length < 2) {
            NoArgsError error = new NoArgsError();
-           error.outputError(getTrigger(),event);
+           error.outputError(event);
         } else {
             try {
                 List<Message> messages = event.getChannel().getHistory().retrievePast(Integer.parseInt(args[1])).complete();

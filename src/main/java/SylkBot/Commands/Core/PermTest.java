@@ -20,6 +20,9 @@ public class PermTest extends Command {
     public PermType getPermLevel() { return PermType.BOT_ADMIN; }
 
     @Override
+    public boolean hasNoArgs() { return true; } //check
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
 
     }

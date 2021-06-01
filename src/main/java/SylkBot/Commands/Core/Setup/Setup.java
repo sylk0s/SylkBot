@@ -22,5 +22,8 @@ public class Setup extends Command {
     }
 
     @Override
+    public boolean hasNoArgs() { return false; }
+
+    @Override
     public PermType getPermLevel() { return PermType.BOT_ADMIN; }
 }

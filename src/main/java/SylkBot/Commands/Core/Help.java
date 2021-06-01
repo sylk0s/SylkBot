@@ -25,6 +25,9 @@ public class Help extends Command {
         return PermType.RESTRICTED;
     }
 
+    @Override
+    public boolean hasNoArgs() { return true; }
+
     //todo rewrite this so i can be lazy
     //also note i need to go fix the ones that work properly now before i fix the ones later
 

@@ -22,6 +22,9 @@ public class Skin extends Command {
         return PermType.EVERYONE;
     }
 
+    @Override
+    public boolean hasNoArgs() { return false; }
+
     //this also looks REALLY bad
     //plan is to implement some 3d render api for the skin
     //https://crafatar.com/ <--- here

@@ -24,6 +24,9 @@ public class History extends Command {
         return PermType.EVERYONE;
     }
 
+    @Override
+    public boolean hasNoArgs() { return false; }
+
     //this looks like crap but whatever, ill godo make it pwetty later
 
     @Override

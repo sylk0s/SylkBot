@@ -1,14 +1,8 @@
 package SylkBot.Error;
 
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-
 import java.util.Objects;
 
-public class ClearError implements Error {
-
-    private String errorTitle;
-    private String errorDescription;
+public class ClearError extends Error {
 
     public ClearError(IllegalArgumentException e) {
         switch(Objects.requireNonNull(getType(e))) {
@@ -33,14 +27,4 @@ public class ClearError implements Error {
         if (e.toString().startsWith("java.lang.IllegalArgumentException: Message Id provided was older than 2 weeks.")) return ErrorType.OLD_MESSAGE;
         return null;
     }
-
-    public void outputError(GuildMessageReceivedEvent event) {
-        EmbedBuilder error = new EmbedBuilder();
-        error.setColor(errorColor);
-        error.setTitle(errorTitle);
-        error.setDescription(errorDescription);
-        event.getChannel().sendMessage(error.build()).queue();
-        error.clear();
-    }
-
 }

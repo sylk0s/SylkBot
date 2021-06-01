@@ -25,6 +25,9 @@ public class Info extends Command {
     }
 
     @Override
+    public boolean hasNoArgs() { return true; }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle("SylkBot Info");
