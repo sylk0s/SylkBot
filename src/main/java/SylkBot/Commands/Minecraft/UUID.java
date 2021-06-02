@@ -1,7 +1,7 @@
 package SylkBot.Commands.Minecraft;
 
 import SylkBot.Commands.Command;
-import SylkBot.Permissons.PermType;
+import SylkBot.Commands.Permissons.PermType;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.shanerx.mojang.Mojang;
 

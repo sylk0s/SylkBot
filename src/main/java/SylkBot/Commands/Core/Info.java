@@ -1,9 +1,10 @@
 package SylkBot.Commands.Core;
 
 import SylkBot.Commands.Command;
-import SylkBot.Main;
 
-import SylkBot.Permissons.PermType;
+
+import SylkBot.Commands.Permissons.PermType;
+import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -16,7 +17,7 @@ public class Info extends Command {
 
     @Override
     public String getHelpInfo() {
-        return Main.prefix + this.getTrigger() + " Use to get info about the bot\n";
+        return SylkBot.prefix + this.getTrigger() + " Use to get info about the bot\n";
     }
 
     @Override

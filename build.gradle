@@ -19,6 +19,7 @@ repositories {
         name 'm2-dv8tion'
         url 'https://m2.dv8tion.net/releases'
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -36,6 +37,9 @@ dependencies {
     //compile group: 'com.wolfram.alpha', name: 'WolframAlpha', version:'1.1'
     //https://github.com/SparklingComet/java-mojang-api
     compile 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
+    compile 'org.mongodb:mongo-java-driver:2.12.3'
+    //compile group: 'org.json', name: 'json', version: '20190722'
+    implementation 'com.google.code.gson:gson:2.8.7'
 }
 
 compileJava.options.encoding = 'UTF-8'

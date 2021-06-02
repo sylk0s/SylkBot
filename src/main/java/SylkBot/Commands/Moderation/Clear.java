@@ -2,12 +2,10 @@ package SylkBot.Commands.Moderation;
 
 import SylkBot.Commands.Command;
 import SylkBot.Error.ClearError;
-import SylkBot.Error.ErrorType;
 import SylkBot.Error.NoArgsError;
-import SylkBot.Main;
 
-import SylkBot.Permissons.PermType;
-import net.dv8tion.jda.api.EmbedBuilder;
+import SylkBot.Commands.Permissons.PermType;
+import SylkBot.SylkBot;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -22,7 +20,7 @@ public class Clear extends Command {
 
     @Override
     public String getHelpInfo() {
-        return Main.prefix + this.getTrigger() + " [value < 100] Will delete up to 100 messages from a channel\n";
+        return SylkBot.prefix + this.getTrigger() + " [value < 100] Will delete up to 100 messages from a channel\n";
     }
 
     @Override

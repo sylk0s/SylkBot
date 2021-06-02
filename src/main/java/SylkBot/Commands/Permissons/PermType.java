@@ -1,4 +1,4 @@
-package SylkBot.Permissons;
+package SylkBot.Commands.Permissons;
 
 public enum PermType {
     BANNED,

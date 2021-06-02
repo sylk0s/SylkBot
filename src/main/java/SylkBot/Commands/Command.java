@@ -1,8 +1,8 @@
 package SylkBot.Commands;
 
 import SylkBot.Error.NoArgsError;
-import SylkBot.Main;
-import SylkBot.Permissons.PermType;
+import SylkBot.Commands.Permissons.PermType;
+import SylkBot.SylkBot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -23,7 +23,7 @@ public abstract class Command extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
-        if (args[0].equalsIgnoreCase(Main.prefix + this.getTrigger())) {
+        if (args[0].equalsIgnoreCase(SylkBot.configs.prefix + this.getTrigger())) {
             if (args.length < 2 && !hasNoArgs()) {
                 NoArgsError error = new NoArgsError();
                 error.outputError(event);
