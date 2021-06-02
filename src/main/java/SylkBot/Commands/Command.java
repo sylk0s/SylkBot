@@ -13,8 +13,10 @@ public abstract class Command extends ListenerAdapter {
     public abstract String getHelpInfo();
     public abstract String getTrigger();
     public abstract PermType getPermLevel();
-    public abstract void run(String[] args, GuildMessageReceivedEvent event);
     public abstract boolean hasNoArgs();
+
+    public abstract void run(String[] args, GuildMessageReceivedEvent event);
+
 
     //todo add in perms?
 
