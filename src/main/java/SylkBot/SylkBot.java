@@ -5,10 +5,11 @@ import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
 import SylkBot.Commands.Fun.Hello;
 import SylkBot.Commands.Fun.Say;
-import SylkBot.Commands.Minecraft.History;
+import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
+import jdk.internal.org.jline.reader.History;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -51,7 +52,7 @@ public class SylkBot extends ListenerAdapter {
     public void onReady(@Nonnull ReadyEvent event) {
         this.servers = new ArrayList<>();
         this.servers = getBot().jda.getGuilds();
-        System.out.println("IS ready");
+        System.out.println("IS ready"); //this doesnt work
     }
 
     public static SylkBot getBot() {
@@ -67,7 +68,7 @@ public class SylkBot extends ListenerAdapter {
         register(new Hello());
         register(new Say());
 
-        register(new History());
+        register(new PlayerInfo());
         register(new Skin());
         register(new UUID());
 

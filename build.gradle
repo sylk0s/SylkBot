@@ -38,8 +38,10 @@ dependencies {
     //https://github.com/SparklingComet/java-mojang-api
     compile 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
     compile 'org.mongodb:mongo-java-driver:2.12.3'
-    //compile group: 'org.json', name: 'json', version: '20190722'
     implementation 'com.google.code.gson:gson:2.8.7'
+
+    //Thank you to <a href="https://crafatar.com">Crafatar</a> for providing avatars.
+    //this is what is used for the .player command
 }
 
 compileJava.options.encoding = 'UTF-8'
