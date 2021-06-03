@@ -36,9 +36,9 @@ public class Help extends Command {
         if (args.length < 2) {
             EmbedBuilder help = new EmbedBuilder();
             help.setTitle("SylkBot Help");
-            String description = " ";
-            for (String key : SylkBot.CommandList.keySet()) {
-                description = description + SylkBot.CommandList.get(key).getHelpInfo();
+            String description = "";
+            for (Command command : SylkBot.getBot().commands) {
+                description = description + command.getHelpInfo();
             }
             help.setDescription(description);
             help.setColor(0xff97cb);
@@ -47,11 +47,11 @@ public class Help extends Command {
             event.getChannel().sendMessage(help.build()).queue();
             help.clear();
         } else {
-            for (String key : SylkBot.CommandList.keySet()) {
-                if (args[1].equalsIgnoreCase(key)) {
+            for (Command command : SylkBot.getBot().commands) {
+                if (args[1].equalsIgnoreCase(command.getTrigger())) {
                     EmbedBuilder help = new EmbedBuilder();
-                    help.setTitle("How to use the " + key + " command.");
-                    help.setDescription(SylkBot.CommandList.get(key).getHelpInfo());
+                    help.setTitle("How to use the " + command.getTrigger() + " command.");
+                    help.setDescription(command.getHelpInfo());
                     help.setColor(0xff97cb);
 
                     event.getChannel().sendTyping().queue();

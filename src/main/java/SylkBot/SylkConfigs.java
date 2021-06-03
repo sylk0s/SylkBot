@@ -37,7 +37,7 @@ public class SylkConfigs {
             Gson gson = new Gson();
             return gson.fromJson(new FileReader(path), SylkConfigs.class);
         } catch (FileNotFoundException e) {
-            System.out.println("Somehow didnt fine the file???");
+            System.out.println("Somehow didnt find the file???");
             return null;
         }
     }
