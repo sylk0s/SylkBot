@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class SylkBot extends ListenerAdapter {
@@ -20,20 +19,20 @@ public class SylkBot extends ListenerAdapter {
 
     public static HashMap<String, Command> CommandList = new HashMap<>();
 
-    public static void main(String[] arguments) throws LoginException, FileNotFoundException {
+    public static void main(String[] arguments) {
 
-        //lazy init for json
-
-        SylkConfigs temp = new SylkConfigs();
-
-        //SylkBot bot = instance();
-        //bot.configs = new SylkConfigs();
-        //bot.create();
+        SylkBot bot = instance();
+        bot.configs = SylkConfigs.setup();
+        bot.create();
     }
 
-    public void create() throws LoginException{
-        this.jda = JDABuilder.createDefault(this.configs.token).build();
-        this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+    public void create() {
+        try {
+            this.jda = JDABuilder.createDefault(this.configs.token).build();
+            this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
+        } catch (LoginException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
@@ -41,7 +40,7 @@ public class SylkBot extends ListenerAdapter {
 
     }
 
-    public static SylkBot instance() throws LoginException {
+    public static SylkBot instance() {
         if (instance == null) instance = new SylkBot();
         return instance;
     }

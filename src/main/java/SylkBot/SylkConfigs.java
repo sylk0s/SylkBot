@@ -13,27 +13,42 @@ public class SylkConfigs {
     @Expose public String token;
     @Expose public String prefix;
 
-
-    public SylkConfigs() throws FileNotFoundException{
+    public static SylkConfigs setup() {
         try {
             File newConfigsFile = new File(path);
-            if(newConfigsFile.createNewFile()) {
-                this.token = "";
-                this.prefix = ".";
+            if (newConfigsFile.createNewFile()) {
+                SylkConfigs newConfigs = new SylkConfigs();
+                newConfigs.token = "token";
+                newConfigs.prefix = ".";
+                newConfigs.saveObject();
+                return newConfigs;
+            } else {
+                System.out.println("Found existing sylkConfigs.json");
+                return setupObject();
             }
         } catch (IOException e) {
-            System.out.println("Tried to recreate the configs file (this is normal)");
+            System.out.println(e);
+            return null;
         }
-        initialize(path);
     }
 
-    public SylkConfigs initialize(String path) throws FileNotFoundException {
-        return new Gson().fromJson(new FileReader(path), SylkConfigs.class);
+    private static SylkConfigs setupObject() {
+        try {
+            Gson gson = new Gson();
+            return gson.fromJson(new FileReader(path), SylkConfigs.class);
+        } catch (FileNotFoundException e) {
+            System.out.println("Somehow didnt fine the file???");
+            return null;
+        }
     }
 
-    public void save(String path) throws IOException {
-        FileWriter writer = new FileWriter(path);
-        new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this, writer);
-        writer.close();
+    private void saveObject() {
+        try {
+            FileWriter writer = new FileWriter(path);
+            new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(this, writer);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }

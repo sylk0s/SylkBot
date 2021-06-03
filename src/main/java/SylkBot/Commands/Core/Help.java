@@ -16,8 +16,8 @@ public class Help extends Command {
 
     @Override
     public String getHelpInfo() {
-        return SylkBot.prefix + this.getTrigger() + " Use to show all commands \n" +
-                SylkBot.prefix + this.getTrigger() + " `[command] Use to get help with a specific command`\n";
+        return " Use to show all commands \n" +
+                " `[command] Use to get help with a specific command`\n";
     }
 
     @Override

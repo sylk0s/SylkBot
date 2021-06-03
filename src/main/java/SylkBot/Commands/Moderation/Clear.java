@@ -20,7 +20,7 @@ public class Clear extends Command {
 
     @Override
     public String getHelpInfo() {
-        return SylkBot.prefix + this.getTrigger() + " [value < 100] Will delete up to 100 messages from a channel\n";
+        return " [value < 100] Will delete up to 100 messages from a channel\n";
     }
 
     @Override

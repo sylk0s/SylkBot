@@ -8,6 +8,8 @@ import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
+import javax.security.auth.login.LoginException;
+
 public class Info extends Command {
 
     @Override
@@ -17,7 +19,7 @@ public class Info extends Command {
 
     @Override
     public String getHelpInfo() {
-        return SylkBot.prefix + this.getTrigger() + " Use to get info about the bot\n";
+        return " Use to get info about the bot\n";
     }
 
     @Override
