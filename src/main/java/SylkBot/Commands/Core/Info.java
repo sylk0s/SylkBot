@@ -38,7 +38,7 @@ public class Info extends Command {
                 "Use .help to learn about the commands this bot can do. \n" +
                 "TBD"); //TODO Write this info command
         info.setColor(0xff97cb);
-        info.setFooter("Created by Sylkos", event.getMember().getUser().getAvatarUrl());
+        info.setFooter("Created by Sylkos", "https://cdn.discordapp.com/avatars/403610859370446851/5582e1ec5346e420f50a006c35bd2e3b.webp?size=128");
 
         event.getChannel().sendTyping().queue();
         event.getChannel().sendMessage(info.build()).queue();

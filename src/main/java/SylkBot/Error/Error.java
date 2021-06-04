@@ -16,4 +16,10 @@ public abstract class Error {
         event.getChannel().sendMessage(error.build()).queue();
         error.clear();
     }
+
+    public enum ErrorType {
+        TOO_MANY_MESSAGES,
+        TOO_FEW_MESSAGES,
+        OLD_MESSAGE
+    }
 }

@@ -3,7 +3,8 @@ package SylkBot;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
-import SylkBot.Commands.Frc.FRCTest;
+import SylkBot.Commands.Frc.TeamInfo;
+import SylkBot.Commands.Frc.TeamName;
 import SylkBot.Commands.Fun.Hello;
 import SylkBot.Commands.Fun.Say;
 import SylkBot.Commands.Minecraft.PlayerInfo;
@@ -65,7 +66,8 @@ public class SylkBot extends ListenerAdapter {
         register(new Help());
         register(new Info());
 
-        register(new FRCTest());
+        register(new TeamName());
+        register(new TeamInfo());
 
         register(new Hello());
         register(new Say());

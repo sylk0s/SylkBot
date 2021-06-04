@@ -13,6 +13,8 @@ public class SylkConfigs {
     @Expose public String botToken;
     @Expose public String prefix;
     @Expose public String tbaToken;
+    @Expose public String firstUsername;
+    @Expose public String firstToken;
 
     public static SylkConfigs setup() {
         try {
@@ -22,6 +24,8 @@ public class SylkConfigs {
                 newConfigs.botToken = "token";
                 newConfigs.prefix = ".";
                 newConfigs.tbaToken = "token";
+                newConfigs.firstUsername = "";
+                newConfigs.firstToken = "token";
                 newConfigs.saveObject();
                 return newConfigs;
             } else {
