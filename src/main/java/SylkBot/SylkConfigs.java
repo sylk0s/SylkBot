@@ -10,16 +10,18 @@ public class SylkConfigs {
 
     private static final String path = "sylkConfigs.json";
 
-    @Expose public String token;
+    @Expose public String botToken;
     @Expose public String prefix;
+    @Expose public String tbaToken;
 
     public static SylkConfigs setup() {
         try {
             File newConfigsFile = new File(path);
             if (newConfigsFile.createNewFile()) {
                 SylkConfigs newConfigs = new SylkConfigs();
-                newConfigs.token = "token";
+                newConfigs.botToken = "token";
                 newConfigs.prefix = ".";
+                newConfigs.tbaToken = "token";
                 newConfigs.saveObject();
                 return newConfigs;
             } else {

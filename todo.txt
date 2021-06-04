@@ -1,0 +1,44 @@
+Mathy stuff
+
+Music Bot
+
+Utility
+    -weather
+    -maps
+    -events?
+    -google
+    -guild info
+    -user info (?whois)
+
+Moderation
+    -perms -> soon (requires shutdown safe storage)
+    -poll -> soon (requires shutdown safe storage)
+    -lists -> safe storage
+    -channel link -> safe storage
+    -pin in channel -> guild configs
+    -t4v -> guild configs
+    -ban -> log
+    -kick -> log
+    -warn -> guild configs
+    -log -> guild configs
+
+Fun
+    -games
+
+MC
+    -jira
+    -chatbridge
+    -litematic?
+    -commands?
+
+Frc
+    -bonk
+    -tba
+    -first
+
+Other API
+    -reddit
+    -youtube
+    -github
+    -twitter
+    -etc...

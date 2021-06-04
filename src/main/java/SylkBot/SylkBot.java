@@ -3,13 +3,13 @@ package SylkBot;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
+import SylkBot.Commands.Frc.FRCTest;
 import SylkBot.Commands.Fun.Hello;
 import SylkBot.Commands.Fun.Say;
 import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
-import jdk.internal.org.jline.reader.History;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -41,7 +41,7 @@ public class SylkBot extends ListenerAdapter {
 
     public void create() {
         try {
-            this.jda = JDABuilder.createDefault(this.configs.token).build();
+            this.jda = JDABuilder.createDefault(this.configs.botToken).build();
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         } catch (LoginException e) {
             System.out.println(e);
@@ -64,6 +64,8 @@ public class SylkBot extends ListenerAdapter {
         this.commands = new ArrayList<>();
         register(new Help());
         register(new Info());
+
+        register(new FRCTest());
 
         register(new Hello());
         register(new Say());
