@@ -3,6 +3,7 @@ package SylkBot;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Core.Help;
 import SylkBot.Commands.Core.Info;
+import SylkBot.Commands.Frc.Mallet;
 import SylkBot.Commands.Frc.TeamInfo;
 import SylkBot.Commands.Frc.TeamName;
 import SylkBot.Commands.Fun.Hello;
@@ -12,6 +13,7 @@ import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
 import SylkBot.Commands.Utility.CTranslate;
+import SylkBot.Commands.Utility.TranslateTo;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -67,6 +69,7 @@ public class SylkBot extends ListenerAdapter {
         register(new Help());
         register(new Info());
 
+        register(new Mallet());
         register(new TeamName());
         register(new TeamInfo());
 
@@ -80,6 +83,7 @@ public class SylkBot extends ListenerAdapter {
         register(new Clear());
 
         register(new CTranslate());
+        register(new TranslateTo());
     }
 
     private void register(Command command) {

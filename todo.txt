@@ -32,7 +32,6 @@ MC
     -commands?
 
 Frc
-    -bonk
     -tba
     -first
 
@@ -45,3 +44,4 @@ Other API
 
 -add more error
 -clean up crap code
+-more translate
