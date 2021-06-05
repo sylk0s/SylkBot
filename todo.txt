@@ -42,3 +42,6 @@ Other API
     -github
     -twitter
     -etc...
+
+-add more error
+-clean up crap code

@@ -11,6 +11,7 @@ import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
+import SylkBot.Commands.Utility.CTranslate;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -77,6 +78,8 @@ public class SylkBot extends ListenerAdapter {
         register(new UUID());
 
         register(new Clear());
+
+        register(new CTranslate());
     }
 
     private void register(Command command) {

@@ -15,6 +15,7 @@ public class SylkConfigs {
     @Expose public String tbaToken;
     @Expose public String firstUsername;
     @Expose public String firstToken;
+    @Expose public String googleToken;
 
     public static SylkConfigs setup() {
         try {
@@ -26,6 +27,7 @@ public class SylkConfigs {
                 newConfigs.tbaToken = "token";
                 newConfigs.firstUsername = "";
                 newConfigs.firstToken = "token";
+                newConfigs.googleToken = "token";
                 newConfigs.saveObject();
                 return newConfigs;
             } else {

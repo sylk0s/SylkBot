@@ -37,8 +37,11 @@ dependencies {
     //compile group: 'com.wolfram.alpha', name: 'WolframAlpha', version:'1.1'
     //https://github.com/SparklingComet/java-mojang-api
     compile 'com.github.SparklingComet:java-mojang-api:-SNAPSHOT'
-
+    //https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.7'
+    //https://github.com/googleapis/java-translate
+    implementation platform('com.google.cloud:libraries-bom:20.5.0')
+    compile 'com.google.cloud:google-cloud-translate'
 
     //Thank you to <a href="https://crafatar.com">Crafatar</a> for providing avatars.
     //this is what is used for the .player command
