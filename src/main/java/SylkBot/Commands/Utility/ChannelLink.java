@@ -20,7 +20,6 @@ public class ChannelLink extends ListenerAdapter {
 
         c1.sendMessage("link established 1").queue();
         c2.sendMessage("link established 2").queue();
-        System.out.println();
     }
 
     public static void createLink(TextChannel l1, TextChannel l2) {

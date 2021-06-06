@@ -4,15 +4,13 @@ import SylkBot.Commands.APICommand;
 import SylkBot.Commands.Permissons.PermType;
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.ISnowflake;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import org.json.JSONObject;
 
 public class UserInfo extends APICommand {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "get info about a discord account";
     }
 
     @Override

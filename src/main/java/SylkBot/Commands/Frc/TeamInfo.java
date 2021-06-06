@@ -21,7 +21,7 @@ public class TeamInfo extends APICommand {
 
     @Override
     public String getHelpInfo() {
-        return null;
+        return "gives various bits of info on FRC teams";
     }
 
     @Override

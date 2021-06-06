@@ -45,3 +45,13 @@ Other API
 -add more error
 -clean up crap code
 -more translate
+
+Things to clean
+    -Configs abstraction
+    -random files
+    -error
+    -APICommands
+    -Channel link code
+    -more info user info
+    -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
+    -send typing

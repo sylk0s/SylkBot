@@ -58,7 +58,7 @@ public class SylkBot extends ListenerAdapter {
     public void onReady(@Nonnull ReadyEvent event) {
         this.servers = new ArrayList<>();
         this.servers = getBot().jda.getGuilds();
-        System.out.println("IS ready"); //this doesnt work
+        System.out.println("IS ready"); //this doesnt work WHY DOESNT THIS WORK! maybe just make it unsafe?
     }
 
     public static SylkBot getBot() {

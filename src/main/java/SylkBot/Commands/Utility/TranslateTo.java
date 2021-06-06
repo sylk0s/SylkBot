@@ -13,7 +13,7 @@ public class TranslateTo extends Command {
 
     @Override
     public String getHelpInfo() {
-        return null;
+        return "translate any text to any language";
     }
 
     @Override

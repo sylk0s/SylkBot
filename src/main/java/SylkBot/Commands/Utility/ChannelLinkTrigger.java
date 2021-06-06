@@ -12,7 +12,7 @@ public class ChannelLinkTrigger extends Command {
 
     @Override
     public String getHelpInfo() {
-        return null;
+        return "for linking two channels together";
     }
 
     @Override

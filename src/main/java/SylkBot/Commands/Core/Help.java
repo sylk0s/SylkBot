@@ -38,7 +38,7 @@ public class Help extends Command {
             help.setTitle("SylkBot Help");
             String description = "";
             for (Command command : SylkBot.getBot().commands) {
-                description = description + command.getHelpInfo();
+                help.addField(command.getTrigger(),command.getHelpInfo() ,false);
             }
             help.setDescription(description);
             help.setColor(0xff97cb);

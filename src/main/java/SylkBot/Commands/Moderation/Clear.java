@@ -5,7 +5,6 @@ import SylkBot.Error.ClearError;
 import SylkBot.Error.NoArgsError;
 
 import SylkBot.Commands.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 

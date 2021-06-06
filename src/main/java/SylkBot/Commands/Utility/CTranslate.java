@@ -13,7 +13,7 @@ public class CTranslate extends APICommand {
 
     @Override
     public String getHelpInfo() {
-        return null;
+        return "translate any text to english";
     }
 
     @Override

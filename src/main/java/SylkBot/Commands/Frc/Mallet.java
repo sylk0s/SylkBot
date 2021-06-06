@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class Mallet extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "bonks people";
     }
 
     @Override

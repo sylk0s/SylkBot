@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class TeamName extends APICommand {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "gives the name of an FRC team when given it's number";
     }
 
     @Override
