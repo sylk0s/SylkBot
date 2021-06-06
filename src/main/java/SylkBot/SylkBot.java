@@ -13,6 +13,7 @@ import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
 import SylkBot.Commands.Utility.CTranslate;
+import SylkBot.Commands.Utility.ChannelLinkTrigger;
 import SylkBot.Commands.Utility.TranslateTo;
 import SylkBot.Commands.Utility.UserInfo;
 import net.dv8tion.jda.api.JDA;
@@ -83,6 +84,7 @@ public class SylkBot extends ListenerAdapter {
 
         register(new Clear());
 
+        register(new ChannelLinkTrigger());
         register(new CTranslate());
         register(new TranslateTo());
         register(new UserInfo());

@@ -46,7 +46,7 @@ public abstract class APICommand extends Command {
         try {
             String end = discordAPILink + call;
             HttpResponse<JsonNode> response = Unirest.get(end)
-                    .header("Authorization","Bot " + SylkBot.getBot().configs.botToken)
+                    .header("Authorization"," Bot " + SylkBot.getBot().configs.botToken)
                     .asJson();
             return response.getBody().getObject();
         } catch (UnirestException e) {
