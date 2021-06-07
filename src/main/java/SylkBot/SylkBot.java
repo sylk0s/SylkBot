@@ -16,6 +16,7 @@ import SylkBot.Commands.Utility.CTranslate;
 import SylkBot.Commands.Utility.ChannelLinkTrigger;
 import SylkBot.Commands.Utility.TranslateTo;
 import SylkBot.Commands.Utility.UserInfo;
+import SylkBot.Configs.SylkConfigs;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -40,7 +41,7 @@ public class SylkBot extends ListenerAdapter {
     public static void main(String[] arguments) {
 
         SylkBot bot = getBot();
-        bot.configs = SylkConfigs.setup();
+        bot.configs = (SylkConfigs) SylkConfigs.setup(SylkConfigs.class);
         bot.create();
         bot.registerCommands();
     }
