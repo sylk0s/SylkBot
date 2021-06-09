@@ -1,5 +1,6 @@
 package SylkBot.Commands.Utility;
 
+import SylkBot.BotObjects.ChannelLink;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Permissons.PermType;
 import SylkBot.SylkBot;

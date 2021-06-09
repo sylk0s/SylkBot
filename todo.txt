@@ -47,7 +47,6 @@ Other API
 -more translate
 
 Things to clean
-    -Configs abstraction
     -random files
     -error
     -APICommands

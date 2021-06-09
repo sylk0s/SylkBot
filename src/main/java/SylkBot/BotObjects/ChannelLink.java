@@ -1,4 +1,4 @@
-package SylkBot.Commands.Utility;
+package SylkBot.BotObjects;
 
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.entities.TextChannel;

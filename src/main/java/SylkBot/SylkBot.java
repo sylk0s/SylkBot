@@ -12,10 +12,8 @@ import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
-import SylkBot.Commands.Utility.CTranslate;
-import SylkBot.Commands.Utility.ChannelLinkTrigger;
-import SylkBot.Commands.Utility.TranslateTo;
-import SylkBot.Commands.Utility.UserInfo;
+import SylkBot.Commands.Moderation.VoteTrigger;
+import SylkBot.Commands.Utility.*;
 import SylkBot.Configs.SylkConfigs;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -84,9 +82,11 @@ public class SylkBot extends ListenerAdapter {
         register(new UUID());
 
         register(new Clear());
+        register(new VoteTrigger());
 
         register(new ChannelLinkTrigger());
         register(new CTranslate());
+        register(new Hex());
         register(new TranslateTo());
         register(new UserInfo());
     }

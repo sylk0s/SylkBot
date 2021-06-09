@@ -1,4 +1,4 @@
-package SylkBot;
+package SylkBot.BotObjects;
 
 public class BotGuild {
 
