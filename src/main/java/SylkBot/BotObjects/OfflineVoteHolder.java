@@ -9,8 +9,8 @@ public class OfflineVoteHolder {
 
     }
 
-    public void update(String[] args, GuildMessageReceivedEvent event) {
-        SylkBot.getBot().votes.put(args[1],new Vote(args, event));
+    public void update(Vote vote) {
+        SylkBot.getBot().votes.put(vote.getTitle(),vote);
 
         //updates json
     }
