@@ -15,8 +15,7 @@ public abstract class Config {
         try {
             File newConfigsFile = new File(config.getPath());
             if (newConfigsFile.createNewFile()) {
-                config.setup();
-                return config;
+                config.setup(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
             } else {
                 return config.setupObject(c);
             }

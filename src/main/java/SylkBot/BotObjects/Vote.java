@@ -1,18 +1,11 @@
 package SylkBot.BotObjects;
 
-import SylkBot.Configs.Config;
-import SylkBot.Configs.SylkConfigs;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import jdk.vm.ci.meta.Local;
+import com.google.gson.annotations.Expose;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.Timer;
 
 public class Vote {
 
@@ -25,24 +18,40 @@ public class Vote {
 
      */
 
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    @Expose private LocalDateTime startTime;
+    @Expose private LocalDateTime endTime;
+    @Expose private String name;
+    //@Expose private String description;
 
     //i know how to do this with gson pog
 
-    public Vote(int hours, int minutes, String name, GuildMessageReceivedEvent event) {
-       startTime = LocalDateTime.now();
-       endTime = startTime.plus(hours, ChronoUnit.HOURS);
-       endTime = endTime.plus(minutes, ChronoUnit.MINUTES);
+    public Vote(String[] args, GuildMessageReceivedEvent event) {
+       this.startTime = LocalDateTime.now();
+       this.endTime = this.startTime.plus(Integer.parseInt(args[2]), ChronoUnit.HOURS);
+       this.endTime = this.endTime.plus(Integer.parseInt(args[3]), ChronoUnit.MINUTES);
+       this.name = args[1];
+
+       System.out.println("new vote");
+       System.out.println(endTime);
+       //grrrrrrrr do i want this to be multiple commands
+       //this.description =
+
+        /*
 
         try {
-            File newVoteFile = new File(""); //todo
-            newVoteFile.createNewFile();
+            File newVoteFile = new File(args[1] + ".json"); //todo
+            if(newVoteFile.createNewFile()) {
+
+            } else {
+
+            }
             //setup gson
             // uhhhhhhhhhh
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+         */
 
        while(true) {
            if(LocalDateTime.now().isAfter(endTime)) {
@@ -53,7 +62,8 @@ public class Vote {
     }
 
     private void endVote() {
-
+        //to do this i need guild configs
+        System.out.println("vote ended");
     }
 
     /*

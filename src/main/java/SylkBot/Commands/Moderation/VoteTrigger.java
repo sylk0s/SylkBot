@@ -28,6 +28,6 @@ public class VoteTrigger extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        new Vote(Integer.valueOf(args[2]), Integer.valueOf(args[3]), args[1],event);
+        new Vote(args, event);
     }
 }
