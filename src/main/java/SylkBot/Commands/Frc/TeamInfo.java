@@ -42,8 +42,6 @@ public class TeamInfo extends APICommand {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
 
-        //make this not break if I put in an incorrect value
-
         String call1 = "/team/frc" + args[1] + "/media/2019";
         String call2 = "/team/frc" + args[1];
         try {

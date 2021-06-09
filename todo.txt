@@ -8,7 +8,6 @@ Utility
     -events?
     -google
     -guild info
-    -user info (?whois)
 
 Moderation
     -perms -> soon (requires shutdown safe storage)
