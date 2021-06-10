@@ -1,7 +1,7 @@
 package SylkBot.Commands.Frc;
 
 import SylkBot.Commands.APICommand;
-import SylkBot.Commands.Permissons.PermType;
+import SylkBot.Permissons.PermType;
 import SylkBot.Error.TeamInfoError;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

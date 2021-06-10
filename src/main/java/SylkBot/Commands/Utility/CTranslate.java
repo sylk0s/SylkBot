@@ -1,7 +1,7 @@
 package SylkBot.Commands.Utility;
 
 import SylkBot.Commands.APICommand;
-import SylkBot.Commands.Permissons.PermType;
+import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import com.google.cloud.translate.Detection;
 import com.google.cloud.translate.Translate;

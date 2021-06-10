@@ -2,7 +2,7 @@ package SylkBot.Commands.Moderation;
 
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
-import SylkBot.Commands.Permissons.PermType;
+import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -36,7 +36,6 @@ public class VoteTrigger extends Command {
         if(args[1].equals("create")) {
             Vote newVote = new Vote(args, event);
             SylkBot.getBot().voteHolder.update(newVote);
-            newVote.deleteList.add(event.getMessage());
         } else {
             boolean found = false;
             for(String key : SylkBot.getBot().votes.keySet()) {
@@ -44,7 +43,6 @@ public class VoteTrigger extends Command {
                     found = true;
                     Vote vote = SylkBot.getBot().votes.get(key);
                     vote.deleteList.add(event.getMessage());
-                    //here is where we can check for args[2] and add other functionality
 
                     if(args[2].equals("setDescription")) {
                         vote.setDescription(event.getMessage().getContentRaw().replace(".vote " + args[1] + " " + args[2] + " ",""));

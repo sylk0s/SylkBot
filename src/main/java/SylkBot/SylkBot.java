@@ -14,6 +14,7 @@ import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
+import SylkBot.Commands.Moderation.DebugGetVote;
 import SylkBot.Commands.Moderation.VoteList;
 import SylkBot.Commands.Moderation.VoteTrigger;
 import SylkBot.Commands.Utility.*;
@@ -49,6 +50,7 @@ public class SylkBot extends ListenerAdapter {
         bot.create();
         bot.registerCommands();
         bot.voteHolder = new OfflineVoteHolder();
+        bot.votes = new HashMap<>();
     }
 
     public void create() {
@@ -97,6 +99,8 @@ public class SylkBot extends ListenerAdapter {
         register(new Hex());
         register(new TranslateTo());
         register(new UserInfo());
+
+        register(new DebugGetVote());
     }
 
     private void register(Command command) {

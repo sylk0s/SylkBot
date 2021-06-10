@@ -3,12 +3,9 @@ package SylkBot.Commands.Core;
 import SylkBot.Commands.Command;
 
 
-import SylkBot.Commands.Permissons.PermType;
-import SylkBot.SylkBot;
+import SylkBot.Permissons.PermType;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-
-import javax.security.auth.login.LoginException;
 
 public class Info extends Command {
 

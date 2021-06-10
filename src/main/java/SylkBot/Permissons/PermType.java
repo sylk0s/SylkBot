@@ -1,4 +1,4 @@
-package SylkBot.Commands.Permissons;
+package SylkBot.Permissons;
 
 //do i really need a file for this
 //i will rewrite eventually

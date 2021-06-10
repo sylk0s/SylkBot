@@ -1,7 +1,7 @@
 package SylkBot.Commands.Fun;
 
 import SylkBot.Commands.Command;
-import SylkBot.Commands.Permissons.PermType;
+import SylkBot.Permissons.PermType;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Say extends Command {

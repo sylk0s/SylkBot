@@ -1,30 +1,33 @@
-package SylkBot.Commands.Fun;
+package SylkBot.Commands.Moderation;
 
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
+import SylkBot.SylkBot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-public class Hello extends Command {
+public class DebugGetVote extends Command {
     @Override
     public String getHelpInfo() {
-        return "greets you";
+        return null;
     }
 
     @Override
     public String getTrigger() {
-        return "hello";
+        return "getvote";
     }
 
     @Override
     public PermType getPermLevel() {
-        return PermType.EVERYONE;
+        return null;
     }
 
     @Override
-    public boolean hasNoArgs() { return true; }
+    public boolean hasNoArgs() {
+        return false;
+    }
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        event.getChannel().sendMessage("hello " + event.getAuthor().getAsMention()).queue();
+        event.getChannel().sendMessage(SylkBot.getBot().votes.get(args[1]).getTitle()).queue();
     }
 }

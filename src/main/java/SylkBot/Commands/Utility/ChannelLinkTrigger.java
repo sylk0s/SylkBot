@@ -2,7 +2,7 @@ package SylkBot.Commands.Utility;
 
 import SylkBot.BotObjects.ChannelLink;
 import SylkBot.Commands.Command;
-import SylkBot.Commands.Permissons.PermType;
+import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
