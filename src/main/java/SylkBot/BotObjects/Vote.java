@@ -6,9 +6,12 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Vote {
 
@@ -23,7 +26,8 @@ public class Vote {
     private int yesVote;
     private int noVote;
     private int abstains;
-    private VoteRunner runner;
+    private Timer timer;
+    private TimerTask task;
 
 
     public ArrayList<Message> deleteList;
@@ -39,7 +43,6 @@ public class Vote {
 
     public void endVote() {
         //to do this i need guild configs
-        System.out.println("vote ended");
         int fractionRequired = 2;
 
         message.getReactions().forEach(m -> {
@@ -77,18 +80,24 @@ public class Vote {
 
     public void setDescription(String des) { this.description = des; }
 
-    public void setTime(int minutes, int hours) {
+    public void setTime(int hours, int minutes) {
         this.minutes = minutes;
         this.hours = hours;
     }
 
     public void post() {
         this.startTime = LocalDateTime.now();
+
         this.endTime = this.startTime.plus(this.hours, ChronoUnit.HOURS);
         this.endTime = this.endTime.plus(this.minutes, ChronoUnit.MINUTES);
-
-        //this is totally gonna be an issue
-        this.runner = new VoteRunner(this.endTime, this);
+        this.task = new TimerTask() {
+            @Override
+            public void run() {
+                endVote();
+            }
+        };
+        this.timer = new Timer();
+        timer.schedule(task, Timestamp.valueOf(endTime));
     }
 
     public void setYes(int yes) { this.yesVote = yes; }
