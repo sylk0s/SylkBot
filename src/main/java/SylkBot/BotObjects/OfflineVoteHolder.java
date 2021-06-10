@@ -10,7 +10,6 @@ public class OfflineVoteHolder {
     }
 
     public void update(Vote vote) {
-        System.out.println(vote.getTitle());
         SylkBot.getBot().votes.put(vote.getTitle(),vote);
 
         //updates json

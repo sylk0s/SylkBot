@@ -23,9 +23,12 @@ public class Vote {
     private int yesVote;
     private int noVote;
     private int abstains;
+    private VoteRunner runner;
 
 
     public ArrayList<Message> deleteList;
+
+    //lets have this class just store info and the vote runner is stored...
 
     public Vote(String[] args, GuildMessageReceivedEvent event) {
        this.name = args[2];
@@ -37,7 +40,6 @@ public class Vote {
     public void endVote() {
         //to do this i need guild configs
         System.out.println("vote ended");
-
         int fractionRequired = 2;
 
         message.getReactions().forEach(m -> {
@@ -85,7 +87,8 @@ public class Vote {
         this.endTime = this.startTime.plus(this.hours, ChronoUnit.HOURS);
         this.endTime = this.endTime.plus(this.minutes, ChronoUnit.MINUTES);
 
-        VoteRunner runner = new VoteRunner(this.endTime, this);
+        //this is totally gonna be an issue
+        this.runner = new VoteRunner(this.endTime, this);
     }
 
     public void setYes(int yes) { this.yesVote = yes; }
