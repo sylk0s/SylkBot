@@ -54,5 +54,4 @@ Things to clean
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -send typing
     -fix visibility
-    -make bot not crash when vote is posted lol
     -add deletion

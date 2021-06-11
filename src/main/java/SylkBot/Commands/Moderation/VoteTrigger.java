@@ -34,46 +34,58 @@ public class VoteTrigger extends Command {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if(args[1].equals("create")) {
-            Vote newVote = new Vote(args, event);
-            SylkBot.getBot().voteHolder.update(newVote);
+            Vote newVote = new Vote(args[2]);
+            newVote.deleteList.add(event.getMessage().getId());
+            SylkBot.getBot().voteHolder.add(newVote);
+            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle()).build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
             boolean found = false;
             for(String key : SylkBot.getBot().votes.keySet()) {
                 if(key.equals(args[1])) {
                     found = true;
                     Vote vote = SylkBot.getBot().votes.get(key);
-                    vote.deleteList.add(event.getMessage());
+                    vote.deleteList.add(event.getMessage().getId());
 
                     if(args[2].equals("setDescription")) {
                         vote.setDescription(event.getMessage().getContentRaw().replace(".vote " + args[1] + " " + args[2] + " ",""));
-                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description set to:").setDescription(vote.getDescription()).build()).queue(m -> vote.deleteList.add(m));
+                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description set to:").setDescription(vote.getDescription()).build()).queue(m -> vote.deleteList.add(m.getId()));
                     }
 
                     if(args[2].equals("delete")) {
 
                     }
 
-                    if(args[2].equals("setTime")) {
+                    if(args[2].equals("time")) {
                         vote.setTime(Integer.parseInt(args[3]),Integer.parseInt(args[4]));
-                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer set to:").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> vote.deleteList.add(m));
+                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer set to:").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> vote.deleteList.add(m.getId()));
                     }
 
                     if(args[2].equals("post")) {
+                        for(String id : vote.deleteList) {
+                            event.getChannel().deleteMessageById(id).queue();
+                        }
+                        vote.authorID = event.getAuthor().getId();
+                        vote.post();
                         EmbedBuilder voteDisplay = new EmbedBuilder();
 
                         voteDisplay.setTitle(vote.getTitle());
                         voteDisplay.setDescription(vote.getDescription());
+                        voteDisplay.addField("Vote ends at: ",vote.endTime.toString() ,false);
+                        voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
 
                         TextChannel channel = event.getChannel(); // this is so i can feed it a channel from configs later
                         channel.sendMessage(voteDisplay.build()).queue(m -> {
                             m.addReaction("U+1F44D").queue();
                             m.addReaction("U+1F44E").queue();
                             m.addReaction("U+270B").queue();
-                            //need some way to get these out of here
-                            vote.message = m;
-                        });
 
-                        vote.post();
+                            vote.messageID = m.getId();
+                            vote.channelID = m.getChannel().getId();
+                        });
+                    }
+
+                    if(args[2].equals("testmode")) {
+                        vote.setTime(0,1);
                     }
                 }
             }

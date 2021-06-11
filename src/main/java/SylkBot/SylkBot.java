@@ -14,7 +14,6 @@ import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
-import SylkBot.Commands.Moderation.DebugGetVote;
 import SylkBot.Commands.Moderation.VoteList;
 import SylkBot.Commands.Moderation.VoteTrigger;
 import SylkBot.Commands.Utility.*;
@@ -56,6 +55,7 @@ public class SylkBot extends ListenerAdapter {
     public void create() {
         try {
             this.jda = JDABuilder.createDefault(this.configs.botToken).build();
+            jda.addEventListener(this);
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         } catch (LoginException e) {
             System.out.println(e);
@@ -66,7 +66,6 @@ public class SylkBot extends ListenerAdapter {
     public void onReady(@Nonnull ReadyEvent event) {
         this.servers = new ArrayList<>();
         this.servers = getBot().jda.getGuilds();
-        System.out.println("IS ready"); //this doesnt work WHY DOESNT THIS WORK! maybe just make it unsafe?
     }
 
     public static SylkBot getBot() {
@@ -99,8 +98,6 @@ public class SylkBot extends ListenerAdapter {
         register(new Hex());
         register(new TranslateTo());
         register(new UserInfo());
-
-        register(new DebugGetVote());
     }
 
     private void register(Command command) {

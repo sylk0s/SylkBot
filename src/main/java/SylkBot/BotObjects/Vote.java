@@ -2,9 +2,7 @@ package SylkBot.BotObjects;
 
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -15,63 +13,63 @@ import java.util.TimerTask;
 
 public class Vote {
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    public LocalDateTime endTime;
     private String name;
     private String description;
-    private GuildMessageReceivedEvent event;
     private int minutes;
     private int hours;
-    public Message message;
+    public String messageID;
+    public String channelID;
     private int yesVote;
     private int noVote;
     private int abstains;
-    private Timer timer;
-    private TimerTask task;
+    public String authorID;
 
+    public ArrayList<String> deleteList; //change this crap so that its by id
 
-    public ArrayList<Message> deleteList;
-
-    //lets have this class just store info and the vote runner is stored...
-
-    public Vote(String[] args, GuildMessageReceivedEvent event) {
-       this.name = args[2];
-       this.event = event;
+    public Vote(String name) {
+       this.name = name;
        this.description = "";
        deleteList = new ArrayList<>();
     }
 
     public void endVote() {
         //to do this i need guild configs
-        int fractionRequired = 2;
+        TextChannel channel = SylkBot.getBot().jda.getTextChannelById(this.channelID);
 
-        message.getReactions().forEach(m -> {
-            if(m.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("U+1F44D", SylkBot.getBot().jda))) setYes(m.getCount()); //yes count
-            if(m.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("U+1F44E", SylkBot.getBot().jda))) setNo(m.getCount()); //no count
-            if(m.getReactionEmote().equals(MessageReaction.ReactionEmote.fromUnicode("U+270B", SylkBot.getBot().jda))) setAbs(m.getCount()); //abstain count
+        channel.retrieveMessageById(this.messageID).queue(m -> {
+            m.getReactions().forEach(r -> {
+                if(r.getReactionEmote().getAsCodepoints().equalsIgnoreCase("U+1F44D")) { this.setYes(r.getCount() - 1); }
+                if(r.getReactionEmote().getAsCodepoints().equalsIgnoreCase("U+1F44E")) { this.setNo(r.getCount() - 1); }
+                if(r.getReactionEmote().getAsCodepoints().equalsIgnoreCase("U+270B"))  { this.setAbs(r.getCount() - 1); }
+            });
+
+            SylkBot.getBot().jda.retrieveUserById(this.authorID).queue(user -> {
+                int voters = this.yesVote + this.noVote;
+
+                String status;
+                int fractionRequired = 2;
+
+                EmbedBuilder result = new EmbedBuilder();
+                if((voters - this.yesVote) >= 0) { //this logic is super easy but i need to rewrite... i think this causes an error
+                    status = "Vote Passed!";
+                    result.setColor(0x00FF00);
+                } else {
+                    status = "Vote Failed :(";
+                    result.setColor(0xFF0000);
+                }
+
+                result.setTitle(status);
+                result.setAuthor(user.getName() + "#" + user.getDiscriminator(), null, user.getEffectiveAvatarUrl());
+                result.addField(this.name, this.description, false);
+                result.addField("Yes:", String.valueOf(yesVote),true);
+                result.addField("No:", String.valueOf(noVote),true);
+                result.addField("Abstains:",String.valueOf(abstains),true);
+
+                m.getChannel().sendMessage(result.build()).queue();
+                m.delete().queue();
+            });
         });
-
-        int voters = this.yesVote + this.noVote;
-
-        String status;
-
-        EmbedBuilder result = new EmbedBuilder();
-
-        if((voters - this.yesVote) > voters/fractionRequired) {
-            status = "Vote Passed!";
-            result.setColor(0x00FF00);
-        } else {
-            status = "Vote Failed :(";
-            result.setColor(0xFF0000);
-        }
-
-        result.setTitle(status);
-        result.setDescription(this.name);
-        result.addField("Yes:", String.valueOf(yesVote),true);
-        result.addField("No:", String.valueOf(noVote),true);
-        result.addField("Abstains:",String.valueOf(abstains),true);
-
-        this.event.getChannel().sendMessage(result.build()).queue();
     }
 
     public String getDescription() { return this.description; }
@@ -86,21 +84,22 @@ public class Vote {
     }
 
     public void post() {
-        this.startTime = LocalDateTime.now();
+        LocalDateTime startTime = LocalDateTime.now();
 
-        this.endTime = this.startTime.plus(this.hours, ChronoUnit.HOURS);
+        this.endTime = startTime.plus(this.hours, ChronoUnit.HOURS);
         this.endTime = this.endTime.plus(this.minutes, ChronoUnit.MINUTES);
-        this.task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 endVote();
             }
         };
-        this.timer = new Timer();
+        Timer timer = new Timer();
         timer.schedule(task, Timestamp.valueOf(endTime));
     }
 
     public void setYes(int yes) { this.yesVote = yes; }
     public void setNo(int no) { this.noVote = no; }
     public void setAbs(int abs) { this.abstains = abs; }
+
 }

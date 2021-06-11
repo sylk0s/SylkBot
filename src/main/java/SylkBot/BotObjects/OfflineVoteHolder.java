@@ -1,7 +1,6 @@
 package SylkBot.BotObjects;
 
 import SylkBot.SylkBot;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class OfflineVoteHolder {
 
@@ -9,10 +8,14 @@ public class OfflineVoteHolder {
 
     }
 
-    public void update(Vote vote) {
+    public void add(Vote vote) {
         SylkBot.getBot().votes.put(vote.getTitle(),vote);
 
         //updates json
+    }
+
+    public void remove(String key) {
+        SylkBot.getBot().votes.remove(key);
     }
 
     /*
