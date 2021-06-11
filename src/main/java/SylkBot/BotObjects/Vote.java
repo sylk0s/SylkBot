@@ -1,6 +1,7 @@
 package SylkBot.BotObjects;
 
 import SylkBot.SylkBot;
+import com.google.gson.annotations.Expose;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 
@@ -13,17 +14,17 @@ import java.util.TimerTask;
 
 public class Vote {
 
-    public LocalDateTime endTime;
-    private String name;
-    private String description;
+    @Expose public LocalDateTime endTime;
+    @Expose public String name;
+    @Expose private String description;
     private int minutes;
     private int hours;
-    public String messageID;
-    public String channelID;
+    @Expose public String messageID;
+    @Expose public String channelID;
     private int yesVote;
     private int noVote;
     private int abstains;
-    public String authorID;
+    @Expose public String authorID;
     private Timer timer;
 
     public ArrayList<String> deleteList; //change this crap so that its by id

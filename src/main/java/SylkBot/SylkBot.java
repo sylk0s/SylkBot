@@ -1,6 +1,7 @@
 package SylkBot;
 
 import SylkBot.BotObjects.BotGuild;
+import SylkBot.BotObjects.JoinLeave;
 import SylkBot.BotObjects.OfflineVoteHolder;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
@@ -15,6 +16,7 @@ import SylkBot.Commands.Minecraft.PlayerInfo;
 import SylkBot.Commands.Minecraft.Skin;
 import SylkBot.Commands.Minecraft.UUID;
 import SylkBot.Commands.Moderation.Clear;
+import SylkBot.Commands.Moderation.GuildSetup;
 import SylkBot.Commands.Moderation.VoteList;
 import SylkBot.Commands.Moderation.VoteTrigger;
 import SylkBot.Commands.Utility.*;
@@ -60,6 +62,7 @@ public class SylkBot extends ListenerAdapter {
         try {
             this.jda = JDABuilder.createDefault(this.configs.botToken).build();
             jda.addEventListener(this);
+            jda.addEventListener(new JoinLeave());
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         } catch (LoginException e) {
             e.printStackTrace();
@@ -78,30 +81,6 @@ public class SylkBot extends ListenerAdapter {
         }
     }
 
-    @Override
-    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
-        for(BotGuild guild : guilds) {
-            if(guild.guildID.equals(event.getGuild().getId())) {
-                TextChannel channel = SylkBot.getBot().jda.getTextChannelById(guild.joinLeaveChannelID);
-                if(channel != null) {
-                    channel.sendMessage(event.getMember().getAsMention() + " joined the server").queue();
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent event) {
-        for(BotGuild guild : guilds) {
-            if(guild.guildID.equals(event.getGuild().getId())) {
-                TextChannel channel = SylkBot.getBot().jda.getTextChannelById(guild.joinLeaveChannelID);
-                if(channel != null) {
-                    channel.sendMessage(event.getMember().getAsMention() + " left the server").queue();
-                }
-            }
-        }
-    }
-
     public static SylkBot getBot() {
         if (instance == null) instance = new SylkBot();
         return instance;
@@ -109,24 +88,32 @@ public class SylkBot extends ListenerAdapter {
 
     private void registerCommands() {
         this.commands = new ArrayList<>();
+
+        //core
         register(new Help());
         register(new Info());
 
+        //FRC
         register(new Mallet());
         register(new TeamName());
         register(new TeamInfo());
 
+        //Fun
         register(new Hello());
         register(new Say());
 
+        //Minecraft
         register(new PlayerInfo());
         register(new Skin());
         register(new UUID());
 
+        //Moderation
         register(new Clear());
+        register(new GuildSetup());
         register(new VoteList());
         register(new VoteTrigger());
 
+        //Utility
         register(new ChannelLinkTrigger());
         register(new CTranslate());
         register(new Hex());

@@ -27,40 +27,42 @@ public class GuildSetup extends Command {
         return false;
     }
 
+    //this doesn't work
+
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if(args[1].equals("adminrole")) {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
-                    guild.adminRoleID = args[2];
+                    guild.updateRoles("admin",args[2]);
                 }
             }
         }
         if(args[1].equals("modrole")) {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
-                    guild.modRoleID = args[2];
+                    guild.updateRoles("mod",args[2]);
                 }
             }
         }
         if(args[1].equals("everyonerole")) {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
-                    guild.everyoneRoleID = args[2];
+                    guild.updateRoles("everyone",args[2]);
                 }
             }
         }
         if(args[1].equals("restrictedrole")) {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
-                    guild.restrictedRoleID = args[2];
+                    guild.updateRoles("restricted",args[2]);
                 }
             }
         }
         if(args[1].equals("bannedrole")) {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
-                    guild.bannedRoleID = args[2];
+                    guild.updateRoles("banned",args[2]);
                 }
             }
         }
@@ -79,6 +81,48 @@ public class GuildSetup extends Command {
             for(BotGuild guild : SylkBot.getBot().guilds) {
                 if(guild.guildID.equals(event.getGuild().getId())) {
                     //todo
+                }
+            }
+        }
+        if(args[1].equals("commandblacklistadd")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.commandBlacklistAdd(args[2]);
+                }
+            }
+        }
+        if(args[1].equals("commandblacklistremove")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.commandBlacklistRemove(args[2]);
+                }
+            }
+        }
+        if(args[1].equals("catagoryblacklistadd")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.catagoryBlacklistAdd(args[2]);
+                }
+            }
+        }
+        if(args[1].equals("catagoryblacklistremove")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.catagoryBlacklistRemove(args[2]);
+                }
+            }
+        }
+        if(args[1].equals("voteresultchannel")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.voteResultChannel(args[2]); //fix
+                }
+            }
+        }
+        if(args[1].equals("joinleavechannel")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.joinLeaveChannel(args[2]);
                 }
             }
         }
