@@ -8,49 +8,22 @@ import java.io.*;
 
 public abstract class Config {
 
-    public abstract void setup();
+    public abstract void setupConfig();
     public abstract String getPath();
 
-    public static Config setup(Class c) {
-        Config config = create(c);
+    public static Config setup(Config c) {
         try {
-            File newConfigsFile = new File(config.getPath());
+            File newConfigsFile = new File(c.getPath());
             if (newConfigsFile.createNewFile()) {
-                config.setup(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
+                c.setupConfig(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
+                //I fixed the sketchy recursion thing this ^ comment is refering to but I'm gonna leave it because I think its funny
             } else {
-                return config.setupObject(c);
+                return c.setupObject();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return config;
-    }
-
-    public static Config setup(Class c, String id) {
-        Config config = create(c);
-        config.generate(id); //bruh
-        try {
-            File newConfigsFile = new File(config.getPath());
-            if (newConfigsFile.createNewFile()) {
-                config.setup(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
-            } else {
-                return config.setupObject(c);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return config;
-    }
-
-    public abstract void generate(String id);
-
-    public static Config create(Class c) {
-
-        //add here
-
-        if (c == BotGuild.class) return new BotGuild();
-        if (c == SylkConfigs.class) return new SylkConfigs();
-        return null;
+        return c;
     }
 
     protected void saveObject() {
@@ -59,17 +32,18 @@ public abstract class Config {
             new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(this, writer);
             writer.close();
         } catch (IOException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
-    protected Config setupObject(Class c) {
+    protected Config setupObject() {
         try {
             Gson gson = new Gson();
 
             //add here
-            if (c == BotGuild.class) { return gson.fromJson(new FileReader(getPath()), BotGuild.class); }
-            if (c == SylkConfigs.class) { return gson.fromJson(new FileReader(getPath()), SylkConfigs.class); }
+
+            if (this instanceof BotGuild) { return gson.fromJson(new FileReader(this.getPath()), BotGuild.class); }
+            if (this instanceof SylkConfigs) { return gson.fromJson(new FileReader(this.getPath()), SylkConfigs.class); }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

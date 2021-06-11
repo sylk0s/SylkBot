@@ -13,7 +13,7 @@ public class SylkConfigs extends Config {
     @Expose public String firstToken;
     @Expose public String googleToken;
 
-    public void setup() {
+    public void setupConfig() {
         this.botToken = "token";
         this.prefix = ".";
         this.tbaToken = "token";
@@ -26,5 +26,4 @@ public class SylkConfigs extends Config {
     public String getPath() {
         return this.path;
     }
-    public void generate(String id) {}
 }

@@ -1,0 +1,86 @@
+package SylkBot.Commands.Moderation;
+
+import SylkBot.BotObjects.BotGuild;
+import SylkBot.Commands.Command;
+import SylkBot.Permissons.PermType;
+import SylkBot.SylkBot;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
+public class GuildSetup extends Command {
+    @Override
+    public String getHelpInfo() {
+        return null;
+    }
+
+    @Override
+    public String getTrigger() {
+        return "guild";
+    }
+
+    @Override
+    public PermType getPermLevel() {
+        return null;
+    }
+
+    @Override
+    public boolean hasNoArgs() {
+        return false;
+    }
+
+    @Override
+    public void run(String[] args, GuildMessageReceivedEvent event) {
+        if(args[1].equals("adminrole")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.adminRoleID = args[2];
+                }
+            }
+        }
+        if(args[1].equals("modrole")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.modRoleID = args[2];
+                }
+            }
+        }
+        if(args[1].equals("everyonerole")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.everyoneRoleID = args[2];
+                }
+            }
+        }
+        if(args[1].equals("restrictedrole")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.restrictedRoleID = args[2];
+                }
+            }
+        }
+        if(args[1].equals("bannedrole")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    guild.bannedRoleID = args[2];
+                }
+            }
+        }
+        if(args[1].equals("removecommand")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    for(Command command : SylkBot.getBot().commands) {
+                        if(command.getTrigger().equals(args[2])) {
+                            guild.commandBlacklist.add(command.getTrigger());
+                        }
+                    }
+                }
+            }
+        }
+        if(args[1].equals("removecatagory")) {
+            for(BotGuild guild : SylkBot.getBot().guilds) {
+                if(guild.guildID.equals(event.getGuild().getId())) {
+                    //todo
+                }
+            }
+        }
+    }
+}

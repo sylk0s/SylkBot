@@ -23,9 +23,10 @@ public class BotGuild extends Config {
     @Expose public String guildID;
     @Expose public ArrayList<Vote> votes;
 
+    //must init guild id beforehand
 
     @Override
-    public void setup() {
+    public void setupConfig() {
         this.adminRoleID = "";
         this.modRoleID = "";
         this.everyoneRoleID = "";
@@ -38,14 +39,12 @@ public class BotGuild extends Config {
         this.joinLeaveChannelID = "";
         this.voteResultChannelID = "";
 
-        this.guildID = "";
         this.votes = new ArrayList<>();
         this.saveObject();
     }
 
     @Override
     public String getPath() {
-        return guildID + ".json";
+        return this.guildID + ".json";
     }
-    public void generate(String id) {this.guildID = id; }
 }

@@ -44,11 +44,12 @@ public class SylkBot extends ListenerAdapter {
     public ArrayList<BotGuild> guilds;
     public ArrayList<Command> commands;
     public HashMap<String, Vote> votes;
+    public static ArrayList<String> catagory = new ArrayList<>();
 
     public static void main(String[] arguments) {
 
         SylkBot bot = getBot();
-        bot.configs = (SylkConfigs) SylkConfigs.setup(SylkConfigs.class);
+        bot.configs = (SylkConfigs) SylkConfigs.setup(new SylkConfigs());
         bot.create();
         bot.registerCommands();
         bot.voteHolder = new OfflineVoteHolder();
@@ -69,8 +70,11 @@ public class SylkBot extends ListenerAdapter {
     public void onReady(@Nonnull ReadyEvent event) {
         this.guilds = new ArrayList<>();
         for(Guild guild : getBot().jda.getGuilds()) {
-            System.out.println(guild.getId() + " in onReady");
-            guilds.add((BotGuild) BotGuild.setup(BotGuild.class, guild.getId()));
+            BotGuild g = new BotGuild();
+            g.guildID = guild.getId();
+            guilds.add((BotGuild) BotGuild.setup(g));
+
+            System.out.println(guild.getName() + ": " + guild.getId());
         }
     }
 
