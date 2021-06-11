@@ -26,4 +26,5 @@ public class SylkConfigs extends Config {
     public String getPath() {
         return this.path;
     }
+    public void generate(String id) {}
 }

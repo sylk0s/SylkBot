@@ -29,8 +29,6 @@ public class VoteTrigger extends Command {
         return false;
     }
 
-    //todo here i want to make a list every time this is called in the vote object so that when vote.post() is called it deletes all the messages
-
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if(args[1].equals("create")) {
@@ -52,7 +50,10 @@ public class VoteTrigger extends Command {
                     }
 
                     if(args[2].equals("delete")) {
-
+                        for(String id : vote.deleteList) {
+                            event.getChannel().deleteMessageById(id).queue();
+                        }
+                        SylkBot.getBot().voteHolder.remove(key);
                     }
 
                     if(args[2].equals("time")) {

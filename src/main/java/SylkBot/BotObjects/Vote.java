@@ -24,6 +24,7 @@ public class Vote {
     private int noVote;
     private int abstains;
     public String authorID;
+    private Timer timer;
 
     public ArrayList<String> deleteList; //change this crap so that its by id
 
@@ -31,6 +32,7 @@ public class Vote {
        this.name = name;
        this.description = "";
        deleteList = new ArrayList<>();
+       this.timer = null;
     }
 
     public void endVote() {
@@ -70,6 +72,7 @@ public class Vote {
                 m.delete().queue();
             });
         });
+        SylkBot.getBot().voteHolder.remove(this.getTitle());
     }
 
     public String getDescription() { return this.description; }
@@ -94,8 +97,17 @@ public class Vote {
                 endVote();
             }
         };
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(task, Timestamp.valueOf(endTime));
+    }
+
+    public void cancel() {
+        if(timer != null) {
+            this.timer.cancel();
+            SylkBot.getBot().voteHolder.remove(this.getTitle());
+        } else {
+            //do something?
+        }
     }
 
     public void setYes(int yes) { this.yesVote = yes; }

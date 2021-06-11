@@ -54,4 +54,3 @@ Things to clean
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -send typing
     -fix visibility
-    -add deletion

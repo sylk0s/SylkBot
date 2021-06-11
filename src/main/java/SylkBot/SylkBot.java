@@ -1,5 +1,6 @@
 package SylkBot;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.BotObjects.OfflineVoteHolder;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
@@ -22,14 +23,16 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class SylkBot extends ListenerAdapter {
 
@@ -38,7 +41,7 @@ public class SylkBot extends ListenerAdapter {
     public SylkConfigs configs;
     public OfflineVoteHolder voteHolder;
 
-    public List<Guild> servers; //fix this
+    public ArrayList<BotGuild> guilds;
     public ArrayList<Command> commands;
     public HashMap<String, Vote> votes;
 
@@ -58,14 +61,41 @@ public class SylkBot extends ListenerAdapter {
             jda.addEventListener(this);
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
         } catch (LoginException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
-        this.servers = new ArrayList<>();
-        this.servers = getBot().jda.getGuilds();
+        this.guilds = new ArrayList<>();
+        for(Guild guild : getBot().jda.getGuilds()) {
+            System.out.println(guild.getId() + " in onReady");
+            guilds.add((BotGuild) BotGuild.setup(BotGuild.class, guild.getId()));
+        }
+    }
+
+    @Override
+    public void onGuildMemberJoin(@Nonnull GuildMemberJoinEvent event) {
+        for(BotGuild guild : guilds) {
+            if(guild.guildID.equals(event.getGuild().getId())) {
+                TextChannel channel = SylkBot.getBot().jda.getTextChannelById(guild.joinLeaveChannelID);
+                if(channel != null) {
+                    channel.sendMessage(event.getMember().getAsMention() + " joined the server").queue();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onGuildMemberRemove(@Nonnull GuildMemberRemoveEvent event) {
+        for(BotGuild guild : guilds) {
+            if(guild.guildID.equals(event.getGuild().getId())) {
+                TextChannel channel = SylkBot.getBot().jda.getTextChannelById(guild.joinLeaveChannelID);
+                if(channel != null) {
+                    channel.sendMessage(event.getMember().getAsMention() + " left the server").queue();
+                }
+            }
+        }
     }
 
     public static SylkBot getBot() {
@@ -103,9 +133,5 @@ public class SylkBot extends ListenerAdapter {
     private void register(Command command) {
         this.commands.add(command);
         this.jda.addEventListener(command);
-    }
-
-    public void updateVotes() {
-        //votes.forEach(v -> new v);
     }
 }
