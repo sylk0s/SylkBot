@@ -28,6 +28,11 @@ public class VoteList extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.MODERATION;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         EmbedBuilder votes = new EmbedBuilder();
         votes.setTitle("Vote List");

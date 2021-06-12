@@ -72,6 +72,7 @@ public class SylkBot extends ListenerAdapter {
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
         this.guilds = new ArrayList<>();
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         for(Guild guild : getBot().jda.getGuilds()) {
             BotGuild g = new BotGuild();
             g.guildID = guild.getId();
@@ -79,6 +80,7 @@ public class SylkBot extends ListenerAdapter {
 
             System.out.println(guild.getName() + ": " + guild.getId());
         }
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 
     public static SylkBot getBot() {

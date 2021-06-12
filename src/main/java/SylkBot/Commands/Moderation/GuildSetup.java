@@ -27,6 +27,11 @@ public class GuildSetup extends Command {
         return false;
     }
 
+    @Override
+    public Category getCategory() {
+        return Category.MODERATION;
+    }
+
     //this doesn't work
 
     @Override

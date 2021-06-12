@@ -40,6 +40,11 @@ public class TeamInfo extends APICommand {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.FRC;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
 
         String call1 = "/team/frc" + args[1] + "/media/2019";

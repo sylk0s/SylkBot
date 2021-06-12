@@ -32,6 +32,11 @@ public class ChannelLinkTrigger extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.UTILITY;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         TextChannel c1 = SylkBot.getBot().jda.getTextChannelById(args[1]);
         TextChannel c2 = SylkBot.getBot().jda.getTextChannelById(args[2]);

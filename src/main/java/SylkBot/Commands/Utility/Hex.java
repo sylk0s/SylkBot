@@ -33,6 +33,11 @@ public class Hex extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.UTILITY;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         // Create the image
         BufferedImage bi = new BufferedImage(60, 60, ColorSpace.TYPE_RGB

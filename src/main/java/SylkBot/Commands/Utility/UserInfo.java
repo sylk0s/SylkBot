@@ -29,6 +29,11 @@ public class UserInfo extends APICommand {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.UTILITY;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
 
         //JSONObject json = discordAPICall("/users/" + args[1]);

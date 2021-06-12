@@ -24,6 +24,11 @@ public class Hello extends Command {
     public boolean hasNoArgs() { return true; }
 
     @Override
+    public Category getCategory() {
+        return Category.FUN;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         event.getChannel().sendMessage("hello " + event.getAuthor().getAsMention()).queue();
     }

@@ -4,6 +4,7 @@ import SylkBot.Commands.Command;
 import SylkBot.Configs.Config;
 import SylkBot.SylkBot;
 import com.google.gson.annotations.Expose;
+import net.dv8tion.jda.api.entities.Guild;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class BotGuild extends Config {
     @Expose public ArrayList<String> catagoryBlacklist;
 
     @Expose public String voteResultChannelID;
+    @Expose public String votePostChannelID;
     @Expose public String joinLeaveChannelID;
 
     @Expose public String guildID;
@@ -39,6 +41,7 @@ public class BotGuild extends Config {
         this.catagoryBlacklist = new ArrayList<>();
 
         this.joinLeaveChannelID = "";
+        this.votePostChannelID = "";
         this.voteResultChannelID = "";
 
         this.votes = new ArrayList<>();
@@ -98,5 +101,20 @@ public class BotGuild extends Config {
     public void joinLeaveChannel(String id) {
         this.joinLeaveChannelID = id;
         this.saveObject();
+    }
+
+    public Guild getGuild() {
+        return SylkBot.getBot().jda.getGuildById(this.guildID);
+    }
+
+    public String getId() {return this.guildID;}
+
+    public static BotGuild getBotGuild(Guild g) {
+        for(BotGuild guild : SylkBot.getBot().guilds) {
+            if(guild.guildID.equals(g.getId())) {
+                return guild;
+            }
+        }
+        return null;
     }
 }

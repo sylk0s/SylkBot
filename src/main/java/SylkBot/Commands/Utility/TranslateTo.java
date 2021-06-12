@@ -32,6 +32,11 @@ public class TranslateTo extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.UTILITY;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         String text = event.getMessage().getContentRaw().replace(".translateto " + args[1] + " ","");
         Translate translate = TranslateOptions.newBuilder().setApiKey(SylkBot.getBot().configs.googleToken).build().getService();

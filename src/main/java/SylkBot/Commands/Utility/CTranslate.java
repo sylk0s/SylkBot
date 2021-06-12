@@ -32,6 +32,11 @@ public class CTranslate extends APICommand {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.UTILITY;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         String text = event.getMessage().getContentRaw().replace(".translate ","");
         Translate translate = TranslateOptions.newBuilder().setApiKey(SylkBot.getBot().configs.googleToken).build().getService();

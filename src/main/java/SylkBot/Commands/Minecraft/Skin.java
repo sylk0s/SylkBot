@@ -25,6 +25,11 @@ public class Skin extends Command {
     @Override
     public boolean hasNoArgs() { return false; }
 
+    @Override
+    public Category getCategory() {
+        return Category.MINECRAFT;
+    }
+
     //this also looks REALLY bad
     //plan is to implement some 3d render api for the skin
     //https://crafatar.com/ <--- here

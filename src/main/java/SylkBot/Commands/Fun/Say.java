@@ -23,6 +23,11 @@ public class Say extends Command {
     @Override
     public boolean hasNoArgs() { return false; }
 
+    @Override
+    public Category getCategory() {
+        return Category.FUN;
+    }
+
     //please dont abuse
 
     @Override

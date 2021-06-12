@@ -7,7 +7,7 @@ Utility
     -maps
     -events?
     -google
-    -guild info
+    -guild info1
 
 Moderation
     -perms -> soon (requires shutdown safe storage)
@@ -54,3 +54,5 @@ Things to clean
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -send typing
     -fix visibility
+
+    -i mis-spelled category but am too lazy to fix it atm so yeah...

@@ -30,6 +30,11 @@ public class PlayerInfo extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.MINECRAFT;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         Mojang api = new Mojang().connect();
         String uuid = api.getUUIDOfUsername(args[1]);

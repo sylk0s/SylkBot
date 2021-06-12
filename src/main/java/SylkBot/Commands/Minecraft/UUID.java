@@ -26,6 +26,11 @@ public class UUID extends Command {
     public boolean hasNoArgs() { return false; }
 
     @Override
+    public Category getCategory() {
+        return Category.MINECRAFT;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         Mojang api = new Mojang().connect();
         event.getChannel().sendMessage(api.getUUIDOfUsername(args[1])).queue();

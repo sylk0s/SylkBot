@@ -3,6 +3,7 @@ package SylkBot.BotObjects;
 import SylkBot.SylkBot;
 import com.google.gson.annotations.Expose;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.sql.Timestamp;
@@ -69,7 +70,14 @@ public class Vote {
                 result.addField("No:", String.valueOf(noVote),true);
                 result.addField("Abstains:",String.valueOf(abstains),true);
 
-                m.getChannel().sendMessage(result.build()).queue();
+                BotGuild guild = BotGuild.getBotGuild(m.getGuild());
+                MessageChannel channel1;
+                if(guild.voteResultChannelID.equals("")) {
+                    channel1 = m.getChannel();
+                } else {
+                    channel1 = SylkBot.getBot().jda.getTextChannelById(guild.voteResultChannelID);
+                }
+                channel1.sendMessage(result.build()).queue();
                 m.delete().queue();
             });
         });

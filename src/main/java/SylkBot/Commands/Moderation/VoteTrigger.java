@@ -1,12 +1,15 @@
 package SylkBot.Commands.Moderation;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.w3c.dom.Text;
 
 public class VoteTrigger extends Command {
     @Override
@@ -27,6 +30,11 @@ public class VoteTrigger extends Command {
     @Override
     public boolean hasNoArgs() {
         return false;
+    }
+
+    @Override
+    public Category getCategory() {
+        return Category.MODERATION;
     }
 
     @Override
@@ -74,7 +82,14 @@ public class VoteTrigger extends Command {
                         voteDisplay.addField("Vote ends at: ",vote.endTime.toString() ,false);
                         voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
 
-                        TextChannel channel = event.getChannel(); // this is so i can feed it a channel from configs later
+                        BotGuild guild = BotGuild.getBotGuild(event.getGuild());
+                        TextChannel channel;
+                        if(guild.votePostChannelID.equals("")) {
+                            channel = event.getChannel();
+                        } else {
+                            channel = SylkBot.getBot().jda.getTextChannelById(guild.votePostChannelID);
+                        }
+
                         channel.sendMessage(voteDisplay.build()).queue(m -> {
                             m.addReaction("U+1F44D").queue();
                             m.addReaction("U+1F44E").queue();

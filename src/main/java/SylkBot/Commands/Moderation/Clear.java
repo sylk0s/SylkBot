@@ -31,6 +31,11 @@ public class Clear extends Command {
     public boolean hasNoArgs() { return false; }
 
     @Override
+    public Category getCategory() {
+        return Category.MODERATION;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if (args.length < 2) {
            NoArgsError error = new NoArgsError();

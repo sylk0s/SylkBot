@@ -26,6 +26,11 @@ public class Mallet extends Command {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.FRC;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         event.getChannel().sendMessage(args[1] + " was bonked by the Mallet of Loving Correction!").queue();
     }

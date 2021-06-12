@@ -26,6 +26,11 @@ public class TeamName extends APICommand {
     }
 
     @Override
+    public Category getCategory() {
+        return Category.FRC;
+    }
+
+    @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         String call = "/team/" + "frc" + args[1];
         event.getChannel().sendMessage(tbaApiCall(call).getJSONObject(0).get("nickname").toString()).queue();
