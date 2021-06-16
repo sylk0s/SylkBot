@@ -48,6 +48,8 @@ public class SylkBot extends ListenerAdapter {
     public HashMap<String, Vote> votes;
     public static ArrayList<String> catagory = new ArrayList<>();
 
+    //test push
+
     public static void main(String[] arguments) {
 
         SylkBot bot = getBot();
