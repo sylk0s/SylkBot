@@ -12,6 +12,7 @@ public class SylkConfigs extends Config {
     @Expose public String firstUsername;
     @Expose public String firstToken;
     @Expose public String googleToken;
+    @Expose public String weatherToken;
 
     public void setupConfig() {
         this.botToken = "token";
@@ -20,6 +21,7 @@ public class SylkConfigs extends Config {
         this.firstUsername = "";
         this.firstToken = "token";
         this.googleToken = "token";
+        this.weatherToken = "token";
         this.saveObject();
     }
 

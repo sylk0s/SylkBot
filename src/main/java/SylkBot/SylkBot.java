@@ -123,6 +123,7 @@ public class SylkBot extends ListenerAdapter {
         register(new Hex());
         register(new TranslateTo());
         register(new UserInfo());
+        register(new Weather());
     }
 
     private void register(Command command) {

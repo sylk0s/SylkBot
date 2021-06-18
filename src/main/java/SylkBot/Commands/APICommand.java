@@ -12,6 +12,7 @@ public abstract class APICommand extends Command {
     protected final String tbaAPILink = "https://www.thebluealliance.com/api/v3";
     protected final String firstAPILink = "https://frc-api.firstinspires.org/v2.0/";
     protected final String discordAPILink = "https://discord.com/api";
+    protected final String weatherAPILink = "https://api.openweathermap.org/data/2.5/weather";
 
     //make this prettier? can i consolidate?
 
@@ -23,7 +24,7 @@ public abstract class APICommand extends Command {
                     .asJson();
             return response.getBody().getArray();
         } catch (UnirestException e) {
-            System.out.println("Unirest issue");
+            e.printStackTrace();
             return null;
         }
     }
@@ -37,7 +38,7 @@ public abstract class APICommand extends Command {
                     .asJson();
             return response.getBody().getObject();
         } catch (UnirestException e) {
-            System.out.println("Unirest issue");
+            e.printStackTrace();
             return null;
         }
     }
@@ -50,7 +51,19 @@ public abstract class APICommand extends Command {
                     .asJson();
             return response.getBody().getObject();
         } catch (UnirestException e) {
-            System.out.println("Unirest issue");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject weatherAPICall(String call) {
+        try {
+            String end = weatherAPILink + call + "&appid=" + SylkBot.getBot().configs.weatherToken;
+            HttpResponse<JsonNode> response = Unirest.get(end)
+                    .asJson();
+            return response.getBody().getObject();
+        } catch (UnirestException e) {
+            e.printStackTrace();
             return null;
         }
     }
