@@ -118,6 +118,7 @@ public class SylkBot extends ListenerAdapter {
         register(new VoteTrigger());
 
         //Utility
+        register(new BotGuildConfigsTest());
         register(new ChannelLinkTrigger());
         register(new CTranslate());
         register(new Hex());

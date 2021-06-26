@@ -2,11 +2,16 @@ package SylkBot.BotObjects;
 
 import SylkBot.Commands.Command;
 import SylkBot.Configs.Config;
+import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import com.google.gson.annotations.Expose;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class BotGuild extends Config {
 
@@ -116,5 +121,38 @@ public class BotGuild extends Config {
             }
         }
         return null;
+    }
+
+    private PermType getPerm(Role role) {
+        if(role.getId().equals(adminRoleID)) { return PermType.BOT_ADMIN; }
+        if(role.getId().equals(modRoleID)) { return PermType.MOD; }
+        if(role.getId().equals(everyoneRoleID)) { return PermType.EVERYONE; }
+        if(role.getId().equals(restrictedRoleID)) { return PermType.RESTRICTED; }
+        if(role.getId().equals(bannedRoleID)) { return PermType.BANNED; }
+        return null;
+    }
+
+    private boolean permSet() {
+        if(this.adminRoleID.equals("")) return false;
+        if(this.modRoleID.equals("")) return false;
+        if(this.everyoneRoleID.equals("")) return false;
+        if(this.restrictedRoleID.equals("")) return false;
+        if(this.bannedRoleID.equals("")) return false;
+        return true;
+    }
+
+    public boolean roleCheck(List<Role> roles, Command command) {
+        if(!permSet()) { return true; } else {
+            for (Role role : roles) {
+                System.out.println(role.getName()); //shit why doesnt this work wtf
+                if (getPerm(role) != null) {
+                    System.out.println(getPerm(role));
+                    if (getPerm(role).ordinal() >= command.getPermLevel().ordinal()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

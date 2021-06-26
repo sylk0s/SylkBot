@@ -45,6 +45,22 @@ dependencies {
 
     //Thank you to <a href="https://crafatar.com">Crafatar</a> for providing avatars.
     //this is what is used for the .player command
+
+    /*
+Other API's and links:
+https://www.thebluealliance.com/apidocs
+https://frc-api-docs.firstinspires.org/#ab6c8b31-68a9-4896-9e0b-14b6b2a9595d
+https://discord.com/developers/docs/resources/user
+https://raw.githubusercontent.com/DV8FromTheWorld/JDA/assets/assets/docs/embeds/07-addField.png
+https://www.thebluealliance.com/apidocs/v3
+//google cloud...
+https://github.com/Sylk0s/SylkBot
+https://github.com/DV8FromTheWorld/JDA/wiki/4%29-Making-a-Music-Bot
+https://github.com/sedmelluq/LavaPlayer#lavaplayer---audio-player-library-for-discord1
+https://openweathermap.org/current
+ */
+
+
 }
 
 compileJava.options.encoding = 'UTF-8'

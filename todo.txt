@@ -10,7 +10,7 @@ Utility
     -guild info1
 
 Moderation
-    -perms -> soon (requires shutdown safe storage)
+    -perms -> soon (requires shutdown safe storage) -> write when I !lazy
     -poll -> soon (requires shutdown safe storage)
     -lists -> safe storage
     -channel link -> safe storage
