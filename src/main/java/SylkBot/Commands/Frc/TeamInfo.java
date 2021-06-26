@@ -31,7 +31,7 @@ public class TeamInfo extends APICommand {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.EVERYONE;
     }
 
     @Override

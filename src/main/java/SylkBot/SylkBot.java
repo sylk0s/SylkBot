@@ -30,6 +30,8 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
@@ -62,7 +64,7 @@ public class SylkBot extends ListenerAdapter {
 
     public void create() {
         try {
-            this.jda = JDABuilder.createDefault(this.configs.botToken).build();
+            this.jda = JDABuilder.createDefault(this.configs.botToken).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).build();
             jda.addEventListener(this);
             jda.addEventListener(new JoinLeave());
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);

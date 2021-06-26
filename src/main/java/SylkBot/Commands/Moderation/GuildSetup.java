@@ -19,7 +19,7 @@ public class GuildSetup extends Command {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.BOT_ADMIN;
     }
 
     @Override

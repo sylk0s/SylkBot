@@ -23,7 +23,7 @@ public class TranslateTo extends Command {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.EVERYONE;
     }
 
     @Override

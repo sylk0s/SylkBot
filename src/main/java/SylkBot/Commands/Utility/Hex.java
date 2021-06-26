@@ -24,7 +24,7 @@ public class Hex extends Command {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.EVERYONE;
     }
 
     @Override

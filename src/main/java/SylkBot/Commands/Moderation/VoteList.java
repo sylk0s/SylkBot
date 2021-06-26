@@ -19,7 +19,7 @@ public class VoteList extends Command {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.EVERYONE;
     }
 
     @Override

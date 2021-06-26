@@ -23,7 +23,7 @@ public class CTranslate extends APICommand {
 
     @Override
     public PermType getPermLevel() {
-        return null;
+        return PermType.EVERYONE;
     }
 
     @Override

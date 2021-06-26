@@ -51,8 +51,8 @@ Things to clean
     -Channel link code
     -more info user info
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
-    -send typing
     -fix visibility
     -include all perms
+    -everyone exception
 
     -i mis-spelled category but am too lazy to fix it atm so yeah...
