@@ -23,7 +23,7 @@ public class BotGuild extends Config {
     @Expose public String bannedRoleID; //no perms
 
     @Expose public ArrayList<String> commandBlacklist;
-    @Expose public ArrayList<String> catagoryBlacklist;
+    @Expose public ArrayList<String> categoryBlacklist;
 
     @Expose public String voteResultChannelID;
     @Expose public String votePostChannelID;
@@ -43,7 +43,7 @@ public class BotGuild extends Config {
         this.bannedRoleID = "";
 
         this.commandBlacklist = new ArrayList<>();
-        this.catagoryBlacklist = new ArrayList<>();
+        this.categoryBlacklist = new ArrayList<>();
 
         this.joinLeaveChannelID = "";
         this.votePostChannelID = "";
@@ -144,9 +144,7 @@ public class BotGuild extends Config {
     public boolean roleCheck(List<Role> roles, Command command) {
         if(!permSet()) { return true; } else {
             for (Role role : roles) {
-                System.out.println(role.getName()); //shit why doesnt this work wtf
                 if (getPerm(role) != null) {
-                    System.out.println(getPerm(role));
                     if (getPerm(role).ordinal() >= command.getPermLevel().ordinal()) {
                         return true;
                     }

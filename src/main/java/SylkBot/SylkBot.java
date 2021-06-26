@@ -131,4 +131,8 @@ public class SylkBot extends ListenerAdapter {
         this.commands.add(command);
         this.jda.addEventListener(command);
     }
+
+    public BotGuild getBotG(String id) {
+        return BotGuild.getBotGuild(this.jda.getGuildById(id));
+    }
 }

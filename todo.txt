@@ -10,7 +10,6 @@ Utility
     -guild info1
 
 Moderation
-    -perms -> soon (requires shutdown safe storage) -> write when I !lazy
     -poll -> soon (requires shutdown safe storage)
     -lists -> safe storage
     -channel link -> safe storage
@@ -54,5 +53,6 @@ Things to clean
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -send typing
     -fix visibility
+    -include all perms
 
     -i mis-spelled category but am too lazy to fix it atm so yeah...
