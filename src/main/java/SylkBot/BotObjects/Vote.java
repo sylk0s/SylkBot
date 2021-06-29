@@ -81,7 +81,7 @@ public class Vote {
                 m.delete().queue();
             });
         });
-        SylkBot.getBot().voteHolder.remove(this.getTitle());
+        SylkBot.getBot().votes.remove(this.getTitle());
     }
 
     public String getDescription() { return this.description; }
@@ -113,7 +113,7 @@ public class Vote {
     public void cancel() {
         if(timer != null) {
             this.timer.cancel();
-            SylkBot.getBot().voteHolder.remove(this.getTitle());
+            SylkBot.getBot().votes.remove(this.getTitle());
         } else {
             //do something?
         }

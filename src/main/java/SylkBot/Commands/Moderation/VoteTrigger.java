@@ -42,7 +42,7 @@ public class VoteTrigger extends Command {
         if(args[1].equals("create")) {
             Vote newVote = new Vote(args[2]);
             newVote.deleteList.add(event.getMessage().getId());
-            SylkBot.getBot().voteHolder.add(newVote);
+            SylkBot.getBot().votes.put(newVote.getTitle(), newVote);
             event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle()).build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
             boolean found = false;
@@ -61,7 +61,7 @@ public class VoteTrigger extends Command {
                         for(String id : vote.deleteList) {
                             event.getChannel().deleteMessageById(id).queue();
                         }
-                        SylkBot.getBot().voteHolder.remove(key);
+                        SylkBot.getBot().votes.remove(key);
                     }
 
                     if(args[2].equals("time")) {
@@ -73,6 +73,9 @@ public class VoteTrigger extends Command {
                         for(String id : vote.deleteList) {
                             event.getChannel().deleteMessageById(id).queue();
                         }
+
+                        SylkBot.getBot().getBotG(event.getGuild().getId()).votes.add(vote); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
+                        SylkBot.getBot().getBotG(event.getGuild().getId()).saveObject();
                         vote.authorID = event.getAuthor().getId();
                         vote.post();
                         EmbedBuilder voteDisplay = new EmbedBuilder();

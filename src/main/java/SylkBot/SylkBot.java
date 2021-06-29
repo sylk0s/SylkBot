@@ -2,7 +2,6 @@ package SylkBot;
 
 import SylkBot.BotObjects.BotGuild;
 import SylkBot.BotObjects.JoinLeave;
-import SylkBot.BotObjects.OfflineVoteHolder;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
 import SylkBot.Commands.Core.Help;
@@ -25,10 +24,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -43,7 +39,6 @@ public class SylkBot extends ListenerAdapter {
     public JDA jda;
     public static SylkBot instance;
     public SylkConfigs configs;
-    public OfflineVoteHolder voteHolder;
 
     public ArrayList<BotGuild> guilds;
     public ArrayList<Command> commands;
@@ -58,7 +53,6 @@ public class SylkBot extends ListenerAdapter {
         bot.configs = (SylkConfigs) SylkConfigs.setup(new SylkConfigs());
         bot.create();
         bot.registerCommands();
-        bot.voteHolder = new OfflineVoteHolder();
         bot.votes = new HashMap<>();
     }
 
