@@ -1,13 +1,11 @@
-Mathy stuff
-
-Music Bot
+Music Bot -> fork?
 
 Utility
-    -weather
+    -weather place args bug
     -maps
     -events?
     -google
-    -guild info1
+    -guild info
 
 Moderation
     -poll -> soon (requires shutdown safe storage)
@@ -48,7 +46,6 @@ Things to clean
     -random files
     -error
     -APICommands
-    -Channel link code
     -more info user info
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -fix visibility

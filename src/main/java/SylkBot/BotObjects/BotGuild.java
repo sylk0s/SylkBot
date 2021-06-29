@@ -16,46 +16,35 @@ import java.util.Objects;
 public class BotGuild extends Config {
 
     //ok what stuff do we need here
-    @Expose public String adminRoleID; //all perms to the bot
-    @Expose public String modRoleID; //most perms
-    @Expose public String everyoneRoleID; //the norm
-    @Expose public String restrictedRoleID; //less perms
-    @Expose public String bannedRoleID; //no perms
+    @Expose public String adminRoleID = ""; //all perms to the bot
+    @Expose public String modRoleID = ""; //most perms
+    @Expose public String everyoneRoleID = ""; //the norm
+    @Expose public String restrictedRoleID = ""; //less perms
+    @Expose public String bannedRoleID = ""; //no perms
 
-    @Expose public ArrayList<String> commandBlacklist;
-    @Expose public ArrayList<String> categoryBlacklist;
+    @Expose public ArrayList<String> commandBlacklist = new ArrayList<>();
+    @Expose public ArrayList<String> categoryBlacklist = new ArrayList<>();
 
-    @Expose public String voteResultChannelID;
-    @Expose public String votePostChannelID;
-    @Expose public String joinLeaveChannelID;
+    @Expose public String voteResultChannelID = "";
+    @Expose public String votePostChannelID = "";
+    @Expose public String joinLeaveChannelID = "";
+    @Expose public String loggerChannelID = "";
 
-    @Expose public String guildID;
-    @Expose public ArrayList<Vote> votes;
+    @Expose public String guildID = "";
+    @Expose public ArrayList<Vote> votes = new ArrayList<>();
+
+    @Expose public ArrayList<String[]> t4vLinks = new ArrayList<>();
 
     //must init guild id beforehand
 
     @Override
-    public void setupConfig() {
-        this.adminRoleID = "";
-        this.modRoleID = "";
-        this.everyoneRoleID = "";
-        this.restrictedRoleID = "";
-        this.bannedRoleID = "";
-
-        this.commandBlacklist = new ArrayList<>();
-        this.categoryBlacklist = new ArrayList<>();
-
-        this.joinLeaveChannelID = "";
-        this.votePostChannelID = "";
-        this.voteResultChannelID = "";
-
-        this.votes = new ArrayList<>();
-        this.saveObject();
+    public String getPath() {
+        return this.guildID + ".json";
     }
 
     @Override
-    public String getPath() {
-        return this.guildID + ".json";
+    public Class getConfigClass() {
+        return BotGuild.class;
     }
 
     public void updateRoles(String role, String id) {

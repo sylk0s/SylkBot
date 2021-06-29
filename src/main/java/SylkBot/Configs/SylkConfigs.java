@@ -2,30 +2,27 @@ package SylkBot.Configs;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
+
 public class SylkConfigs extends Config {
 
     private final String path = "sylkConfigs.json";
 
-    @Expose public String botToken;
-    @Expose public String prefix;
-    @Expose public String tbaToken;
-    @Expose public String firstUsername;
-    @Expose public String firstToken;
-    @Expose public String googleToken;
-    @Expose public String weatherToken;
-
-    public void setupConfig() {
-        this.botToken = "token";
-        this.prefix = ".";
-        this.tbaToken = "token";
-        this.firstUsername = "";
-        this.firstToken = "token";
-        this.googleToken = "token";
-        this.weatherToken = "token";
-        this.saveObject();
-    }
+    @Expose public String botToken = "token";
+    @Expose public String prefix = ".";
+    @Expose public String tbaToken = "token";
+    @Expose public String firstUsername = "";
+    @Expose public String firstToken = "token";
+    @Expose public String googleToken = "token";
+    @Expose public String weatherToken = "token";
+    @Expose public ArrayList<String[]> channelLinkIDs = new ArrayList<>();
 
     public String getPath() {
         return this.path;
+    }
+
+    @Override
+    public Class getConfigClass() {
+        return SylkConfigs.class;
     }
 }

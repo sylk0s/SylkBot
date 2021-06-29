@@ -48,7 +48,7 @@ public class SylkBot extends ListenerAdapter {
     public ArrayList<BotGuild> guilds;
     public ArrayList<Command> commands;
     public HashMap<String, Vote> votes;
-    public static ArrayList<String> catagory = new ArrayList<>();
+    public static ArrayList<String> category = new ArrayList<>();
 
     //test push
 
@@ -124,7 +124,9 @@ public class SylkBot extends ListenerAdapter {
         register(new ChannelLinkTrigger());
         register(new CTranslate());
         register(new Hex());
+        register(new InfoProbe());
         register(new TranslateTo());
+        register(new UpdateConfigs());
         register(new UserInfo());
         register(new Weather());
     }

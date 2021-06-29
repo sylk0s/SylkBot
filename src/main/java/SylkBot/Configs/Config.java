@@ -8,17 +8,19 @@ import java.io.*;
 
 public abstract class Config {
 
-    public abstract void setupConfig();
     public abstract String getPath();
+    public abstract Class getConfigClass();
 
     public static Config setup(Config c) {
         try {
             File newConfigsFile = new File(c.getPath());
             if (newConfigsFile.createNewFile()) {
-                c.setupConfig(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
+                c.saveObject(); //WTF is this i didnt notice it before i know how it works but WOW thats crazy that it does... not intended but should be fine?
                 //I fixed the sketchy recursion thing this ^ comment is refering to but I'm gonna leave it because I think its funny
             } else {
-                return c.setupObject();
+                Config g = c.setupObject();
+                g.saveObject();
+                return g;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -26,7 +28,7 @@ public abstract class Config {
         return c;
     }
 
-    protected void saveObject() {
+    public void saveObject() {
         try {
             FileWriter writer = new FileWriter(this.getPath());
             new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(this, writer);
@@ -38,12 +40,7 @@ public abstract class Config {
 
     protected Config setupObject() {
         try {
-            Gson gson = new Gson();
-
-            //add here
-
-            if (this instanceof BotGuild) { return gson.fromJson(new FileReader(this.getPath()), BotGuild.class); }
-            if (this instanceof SylkConfigs) { return gson.fromJson(new FileReader(this.getPath()), SylkConfigs.class); }
+            return (Config) new Gson().fromJson(new FileReader(this.getPath()), getConfigClass());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
