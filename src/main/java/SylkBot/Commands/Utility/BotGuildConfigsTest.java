@@ -34,10 +34,10 @@ public class BotGuildConfigsTest extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        if(args[1].equals("admin")) { event.getChannel().sendMessage(BotGuild.getBotGuild(SylkBot.getBot().jda.getGuildById(event.getGuild().getId())).adminRoleID).queue();}
-        if(args[1].equals("mod")) { event.getChannel().sendMessage(BotGuild.getBotGuild(SylkBot.getBot().jda.getGuildById(event.getGuild().getId())).modRoleID).queue();}
-        if(args[1].equals("everyone")) { event.getChannel().sendMessage(BotGuild.getBotGuild(SylkBot.getBot().jda.getGuildById(event.getGuild().getId())).everyoneRoleID).queue();}
-        if(args[1].equals("restricted")) { event.getChannel().sendMessage(BotGuild.getBotGuild(SylkBot.getBot().jda.getGuildById(event.getGuild().getId())).restrictedRoleID).queue();}
-        if(args[1].equals("banned")) { event.getChannel().sendMessage(BotGuild.getBotGuild(SylkBot.getBot().jda.getGuildById(event.getGuild().getId())).bannedRoleID).queue();}
+        if(args[1].equals("admin")) { event.getChannel().sendMessage(BotGuild.getBotGuild(event.getGuild().getId()).adminRoleID).queue();}
+        if(args[1].equals("mod")) { event.getChannel().sendMessage(BotGuild.getBotGuild(event.getGuild().getId()).modRoleID).queue();}
+        if(args[1].equals("everyone")) { event.getChannel().sendMessage(BotGuild.getBotGuild(event.getGuild().getId()).everyoneRoleID).queue();}
+        if(args[1].equals("restricted")) { event.getChannel().sendMessage(BotGuild.getBotGuild(event.getGuild().getId()).restrictedRoleID).queue();}
+        if(args[1].equals("banned")) { event.getChannel().sendMessage(BotGuild.getBotGuild(event.getGuild().getId()).bannedRoleID).queue();}
     }
 }

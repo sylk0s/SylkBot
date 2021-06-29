@@ -1,5 +1,6 @@
 package SylkBot.Commands;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.Error.NoArgsError;
 import SylkBot.Error.PermsError;
 import SylkBot.Permissons.PermType;
@@ -23,7 +24,7 @@ public abstract class Command extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
         if (args[0].equalsIgnoreCase(SylkBot.getBot().configs.prefix + this.getTrigger())) {
-            if(SylkBot.getBot().getBotG(event.getGuild().getId()).roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(),this)) {
+            if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(),this)) {
                 if (args.length < 2 && !hasNoArgs()) {
                     NoArgsError error = new NoArgsError();
                     error.outputError(event);

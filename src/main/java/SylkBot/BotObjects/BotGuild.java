@@ -72,18 +72,18 @@ public class BotGuild extends Config {
         }
         this.saveObject();
     }
-    public void catagoryBlacklistAdd(String trigger) {
+    public void categoryBlacklistAdd(String trigger) {
         for(Command command : SylkBot.getBot().commands) {
             if(command.getTrigger().equals(trigger)) {
-                this.commandBlacklist.add(trigger);
+                this.categoryBlacklist.add(trigger);
             }
         }
         this.saveObject();
     }
-    public void catagoryBlacklistRemove(String trigger) {
+    public void categoryBlacklistRemove(String trigger) {
         for(Command command : SylkBot.getBot().commands) {
             if(command.getTrigger().equals(trigger)) {
-                this.commandBlacklist.add(trigger);
+                this.categoryBlacklist.add(trigger);
             }
         }
         this.saveObject();
@@ -97,15 +97,26 @@ public class BotGuild extends Config {
         this.saveObject();
     }
 
+    public void setLoggerChannelID(String id) {
+        this.loggerChannelID = id;
+        this.saveObject();
+    }
+
+    public void setT4vLinks(String vcID, String t4vID) {
+        String[] link = {vcID, t4vID};
+        this.t4vLinks.add(link);
+        this.saveObject();
+    }
+
     public Guild getGuild() {
         return SylkBot.getBot().jda.getGuildById(this.guildID);
     }
 
     public String getId() {return this.guildID;}
 
-    public static BotGuild getBotGuild(Guild g) {
+    public static BotGuild getBotGuild(String id) {
         for(BotGuild guild : SylkBot.getBot().guilds) {
-            if(guild.guildID.equals(g.getId())) {
+            if(guild.guildID.equals(id)) {
                 return guild;
             }
         }

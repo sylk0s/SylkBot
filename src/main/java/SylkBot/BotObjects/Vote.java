@@ -70,7 +70,7 @@ public class Vote {
                 result.addField("No:", String.valueOf(noVote),true);
                 result.addField("Abstains:",String.valueOf(abstains),true);
 
-                BotGuild guild = BotGuild.getBotGuild(m.getGuild());
+                BotGuild guild = BotGuild.getBotGuild(m.getGuild().getId());
                 MessageChannel channel1;
                 if(guild.voteResultChannelID.equals("")) {
                     channel1 = m.getChannel();

@@ -1,0 +1,5 @@
+-to address
+    -make votes accessable through guild
+    -vote restarts
+    -votetrigger does less
+    -naming issue

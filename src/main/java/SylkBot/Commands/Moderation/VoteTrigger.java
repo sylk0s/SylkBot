@@ -74,8 +74,8 @@ public class VoteTrigger extends Command {
                             event.getChannel().deleteMessageById(id).queue();
                         }
 
-                        SylkBot.getBot().getBotG(event.getGuild().getId()).votes.add(vote); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
-                        SylkBot.getBot().getBotG(event.getGuild().getId()).saveObject();
+                        BotGuild.getBotGuild(event.getGuild().getId()).votes.add(vote); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
+                        BotGuild.getBotGuild(event.getGuild().getId()).saveObject();
                         vote.authorID = event.getAuthor().getId();
                         vote.post();
                         EmbedBuilder voteDisplay = new EmbedBuilder();
@@ -85,7 +85,7 @@ public class VoteTrigger extends Command {
                         voteDisplay.addField("Vote ends at: ",vote.endTime.toString() ,false);
                         voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
 
-                        BotGuild guild = BotGuild.getBotGuild(event.getGuild());
+                        BotGuild guild = BotGuild.getBotGuild(event.getGuild().getId());
                         TextChannel channel;
                         if(guild.votePostChannelID.equals("")) {
                             channel = event.getChannel();
