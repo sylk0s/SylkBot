@@ -42,7 +42,6 @@ public class SylkBot extends ListenerAdapter {
 
     public ArrayList<BotGuild> guilds;
     public ArrayList<Command> commands;
-    public HashMap<String, Vote> votes;
     public static ArrayList<String> category = new ArrayList<>();
 
     //test push
@@ -53,7 +52,6 @@ public class SylkBot extends ListenerAdapter {
         bot.configs = (SylkConfigs) SylkConfigs.setup(new SylkConfigs());
         bot.create();
         bot.registerCommands();
-        bot.votes = new HashMap<>();
     }
 
     public void create() {

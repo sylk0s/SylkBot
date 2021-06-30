@@ -1,5 +1,6 @@
 package SylkBot.Commands.Moderation;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
@@ -36,9 +37,11 @@ public class VoteList extends Command {
     public void run(String[] args, GuildMessageReceivedEvent event) {
         EmbedBuilder votes = new EmbedBuilder();
         votes.setTitle("Vote List");
-        for(String key : SylkBot.getBot().votes.keySet()) {
-            votes.addField(key,SylkBot.getBot().votes.get(key).getDescription(),false);
-        }
+        SylkBot.getBot().guilds.forEach(g -> {
+            g.votes.forEach(v -> {
+                votes.addField(v.getTitle(),v.getDescription(),false);
+            });
+        });
         //color?
         event.getChannel().sendMessage(votes.build()).queue();
     }

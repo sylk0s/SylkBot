@@ -39,79 +39,80 @@ public class VoteTrigger extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        if(args[1].equals("create")) {
+        if (args[1].equals("create")) {
             Vote newVote = new Vote(args[2]);
+            newVote.guildID = event.getGuild().getId();
             newVote.deleteList.add(event.getMessage().getId());
-            SylkBot.getBot().votes.put(newVote.getTitle(), newVote);
+            BotGuild.getBotGuild(newVote.guildID).votes.add(newVote);
             event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle()).build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
-            boolean found = false;
-            for(String key : SylkBot.getBot().votes.keySet()) {
-                if(key.equals(args[1])) {
-                    found = true;
-                    Vote vote = SylkBot.getBot().votes.get(key);
-                    vote.deleteList.add(event.getMessage().getId());
+            SylkBot.getBot().guilds.forEach(g -> {
+                g.votes.forEach(v -> {
+                    if (v.getTitle().equals(args[1])) {
+                        System.out.println(v.getTitle());
+                        System.out.println(v.deleteList.size());
+                        System.out.println(event.getMessage().getId());
+                        v.deleteList.add(event.getMessage().getId());
 
-                    if(args[2].equals("setDescription")) {
-                        vote.setDescription(event.getMessage().getContentRaw().replace(".vote " + args[1] + " " + args[2] + " ",""));
-                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description set to:").setDescription(vote.getDescription()).build()).queue(m -> vote.deleteList.add(m.getId()));
-                    }
-
-                    if(args[2].equals("delete")) {
-                        for(String id : vote.deleteList) {
-                            event.getChannel().deleteMessageById(id).queue();
-                        }
-                        SylkBot.getBot().votes.remove(key);
-                    }
-
-                    if(args[2].equals("time")) {
-                        vote.setTime(Integer.parseInt(args[3]),Integer.parseInt(args[4]));
-                        event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer set to:").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> vote.deleteList.add(m.getId()));
-                    }
-
-                    if(args[2].equals("post")) {
-                        for(String id : vote.deleteList) {
-                            event.getChannel().deleteMessageById(id).queue();
+                        if (args[2].equals("setDescription")) {
+                            v.setDescription(event.getMessage().getContentRaw().replace(".vote " + args[1] + " " + args[2] + " ", ""));
+                            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description set to:").setDescription(v.getDescription()).build()).queue(m -> v.deleteList.add(m.getId()));
                         }
 
-                        BotGuild.getBotGuild(event.getGuild().getId()).votes.add(vote); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
-                        BotGuild.getBotGuild(event.getGuild().getId()).saveObject();
-                        vote.authorID = event.getAuthor().getId();
-                        vote.post();
-                        EmbedBuilder voteDisplay = new EmbedBuilder();
-
-                        voteDisplay.setTitle(vote.getTitle());
-                        voteDisplay.setDescription(vote.getDescription());
-                        voteDisplay.addField("Vote ends at: ",vote.endTime.toString() ,false);
-                        voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
-
-                        BotGuild guild = BotGuild.getBotGuild(event.getGuild().getId());
-                        TextChannel channel;
-                        if(guild.votePostChannelID.equals("")) {
-                            channel = event.getChannel();
-                        } else {
-                            channel = SylkBot.getBot().jda.getTextChannelById(guild.votePostChannelID);
+                        if (args[2].equals("delete")) {
+                            for (String id : v.deleteList) {
+                                event.getChannel().deleteMessageById(id).queue();
+                            }
+                            g.votes.remove(v);
                         }
 
-                        channel.sendMessage(voteDisplay.build()).queue(m -> {
-                            m.addReaction("U+1F44D").queue();
-                            m.addReaction("U+1F44E").queue();
-                            m.addReaction("U+270B").queue();
+                        if (args[2].equals("time")) {
+                            v.setTime(Integer.parseInt(args[3]), Integer.parseInt(args[4]));
+                            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer set to:").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> v.deleteList.add(m.getId()));
+                        }
 
-                            vote.messageID = m.getId();
-                            vote.channelID = m.getChannel().getId();
-                        });
-                    }
+                        if (args[2].equals("post")) {
+                            for (String id : v.deleteList) {
+                                event.getChannel().deleteMessageById(id).queue();
+                            }
 
-                    if(args[2].equals("testmode")) {
-                        vote.setTime(0,1);
+                            BotGuild.getBotGuild(event.getGuild().getId()).votes.add(v); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
+                            BotGuild.getBotGuild(event.getGuild().getId()).saveObject();
+                            v.authorID = event.getAuthor().getId();
+                            v.post();
+                            EmbedBuilder voteDisplay = new EmbedBuilder();
+
+                            voteDisplay.setTitle(v.getTitle());
+                            voteDisplay.setDescription(v.getDescription());
+                            voteDisplay.addField("Vote ends at: ", v.endTime.toString(), false);
+                            voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
+
+                            BotGuild guild = BotGuild.getBotGuild(event.getGuild().getId());
+                            TextChannel channel;
+                            if (guild.votePostChannelID.equals("")) {
+                                channel = event.getChannel();
+                            } else {
+                                channel = SylkBot.getBot().jda.getTextChannelById(guild.votePostChannelID);
+                            }
+
+                            channel.sendMessage(voteDisplay.build()).queue(m -> {
+                                m.addReaction("U+1F44D").queue();
+                                m.addReaction("U+1F44E").queue();
+                                m.addReaction("U+270B").queue();
+
+                                v.messageID = m.getId();
+                                v.channelID = m.getChannel().getId();
+                            });
+                        }
+
+                        if (args[2].equals("testmode")) {
+                            v.setTime(0, 1);
+                        }
+                    } else {
+                        event.getChannel().sendMessage("vote not found oooorrrrrr the thingy doesnt work").queue(); //todo as an error
                     }
-                }
-            }
-            if(!found) {
-                event.getChannel().sendMessage("vote not found").queue();
-                //todo redo this as an error
-            }
+                });
+            });
         }
     }
 }

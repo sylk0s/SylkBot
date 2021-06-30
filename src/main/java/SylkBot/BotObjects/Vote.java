@@ -27,8 +27,9 @@ public class Vote {
     private int abstains;
     @Expose public String authorID;
     private Timer timer;
+    @Expose public String guildID;
 
-    public ArrayList<String> deleteList; //change this crap so that its by id
+    public ArrayList<String> deleteList;
 
     public Vote(String name) {
        this.name = name;
@@ -81,7 +82,7 @@ public class Vote {
                 m.delete().queue();
             });
         });
-        SylkBot.getBot().votes.remove(this.getTitle());
+        BotGuild.getBotGuild(guildID).votes.remove(this.getTitle());
     }
 
     public String getDescription() { return this.description; }
@@ -113,7 +114,7 @@ public class Vote {
     public void cancel() {
         if(timer != null) {
             this.timer.cancel();
-            SylkBot.getBot().votes.remove(this.getTitle());
+            BotGuild.getBotGuild(guildID).votes.remove(this.getTitle());
         } else {
             //do something?
         }
