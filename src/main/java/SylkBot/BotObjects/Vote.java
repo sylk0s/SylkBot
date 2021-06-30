@@ -83,6 +83,7 @@ public class Vote {
             });
         });
         BotGuild.getBotGuild(guildID).votes.remove(this.getTitle());
+        BotGuild.getBotGuild(guildID).saveObject();
     }
 
     public String getDescription() { return this.description; }
