@@ -45,11 +45,13 @@ Things to clean
     -random files
     -error
     -APICommands
-    -more info user info
     -Help! I need someone... Help! not just anyone... Help! you know i need someone... heeee-eee-eee-eee-eeelp
     -include all perms
     -everyone exception
     -add more errors in EVERYTHING
     -encapsulation
+    -voting logic
+    -voting time parse
+    -delete in progress vote
 
     -i mis-spelled category but am too lazy to fix it atm so yeah...

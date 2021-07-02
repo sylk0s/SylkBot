@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.annotation.Nonnull;
@@ -57,7 +58,7 @@ public class SylkBot extends ListenerAdapter {
 
     public void create() {
         try {
-            this.jda = JDABuilder.createDefault(this.configs.botToken).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).build();
+            this.jda = JDABuilder.createDefault(this.configs.botToken).enableIntents(GatewayIntent.GUILD_MEMBERS).setMemberCachePolicy(MemberCachePolicy.ALL).setChunkingFilter(ChunkingFilter.ALL).build();
             jda.addEventListener(this);
             jda.addEventListener(new JoinLeave());
             this.jda.getPresence().setStatus(OnlineStatus.DO_NOT_DISTURB);
