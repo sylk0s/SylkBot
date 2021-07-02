@@ -31,6 +31,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -76,6 +77,12 @@ public class SylkBot extends ListenerAdapter {
 
             System.out.println(guild.getName() + ": " + guild.getId());
         }
+        this.guilds.forEach(g -> {
+            g.votes.forEach(v -> {
+                v.post(LocalDateTime.parse(v.stringEndTime));
+            });
+        });
+
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 

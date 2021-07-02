@@ -1,4 +1,0 @@
--to address
-    -vote restarts
-    -votetrigger does less
-    -naming issue

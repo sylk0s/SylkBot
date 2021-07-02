@@ -32,8 +32,11 @@ public class BotGuild extends Config {
 
     @Expose public String guildID = "";
     @Expose public ArrayList<Vote> votes = new ArrayList<>();
+    public ArrayList<Vote> tempVotes = new ArrayList<>();
 
     @Expose public ArrayList<String[]> t4vLinks = new ArrayList<>();
+
+    @Expose public long uniqueIDCount = 0;
 
     //must init guild id beforehand
 
@@ -152,5 +155,10 @@ public class BotGuild extends Config {
             }
         }
         return false;
+    }
+
+    public long getUniqueID() {
+        uniqueIDCount++;
+        return uniqueIDCount;
     }
 }

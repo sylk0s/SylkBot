@@ -40,66 +40,41 @@ public class VoteTrigger extends Command {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if (args[1].equals("create")) {
-            Vote newVote = new Vote(args[2]);
-            newVote.guildID = event.getGuild().getId();
+            Vote newVote = new Vote(BotGuild.getBotGuild(
+                    event.getGuild().getId()).getUniqueID(),
+                    event.getMessage().getContentRaw().substring(13),
+                    event.getGuild().getId()
+                    );
             newVote.deleteList.add(event.getMessage().getId());
-            BotGuild.getBotGuild(newVote.guildID).votes.add(newVote);
-            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle()).build()).queue(m -> newVote.deleteList.add(m.getId()));
+            event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle() + "\nVote ID: " + newVote.id + "\nUse this to reference votes in future commands.").build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
             BotGuild g = BotGuild.getBotGuild(event.getGuild().getId());
-            for(Vote v : g.votes) {
-                if (v.getTitle().equals(args[1])) {
+            for(Vote v : g.tempVotes) {
+                if (v.getId() == Long.parseLong(args[1])) {
                     v.deleteList.add(event.getMessage().getId());
                     switch (args[2]) {
                             case "setDescription":
                                 v.setDescription(event.getMessage().getContentRaw().replace(".vote " + args[1] + " " + args[2] + " ", ""));
-                                event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description set to:").setDescription(v.getDescription()).build()).queue(m -> v.deleteList.add(m.getId()));
+                                event.getChannel().sendMessage(new EmbedBuilder().setTitle("Description for " + v.getTitle() + " (ID: " + v.getId() + ") set to: ").setDescription(v.getDescription()).build()).queue(m -> v.deleteList.add(m.getId()));
                                 break;
 
                             case "delete":
                                 for (String id : v.deleteList) {
                                     event.getChannel().deleteMessageById(id).queue();
                                 }
-                                g.votes.remove(v);
+                                g.tempVotes.remove(v);
                                 break;
 
                             case "time":
                                 v.setTime(Integer.parseInt(args[3]), Integer.parseInt(args[4]));
-                                event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer set to:").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> v.deleteList.add(m.getId()));
+                                event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote timer for " + v.getTitle() + " (ID: " + v.getId() + ") set to: ").setDescription("Hours: " + args[3] + "\n" + "Minutes: " + args[4]).build()).queue(m -> v.deleteList.add(m.getId()));
                                 break;
 
                             case "post":
                                 for (String id : v.deleteList) {
                                     event.getChannel().deleteMessageById(id).queue();
                                 }
-
-                                BotGuild.getBotGuild(event.getGuild().getId()).votes.add(v); //this doesnt work... we also need to figure out how to do the other transfer and split into guilds
-                                BotGuild.getBotGuild(event.getGuild().getId()).saveObject();
-                                v.authorID = event.getAuthor().getId();
-                                v.post();
-                                EmbedBuilder voteDisplay = new EmbedBuilder();
-
-                                voteDisplay.setTitle(v.getTitle());
-                                voteDisplay.setDescription(v.getDescription());
-                                voteDisplay.addField("Vote ends at: ", v.endTime.toString(), false);
-                                voteDisplay.setAuthor(event.getAuthor().getName() + "#" + event.getAuthor().getDiscriminator(), null, event.getAuthor().getEffectiveAvatarUrl());
-
-                                BotGuild guild = BotGuild.getBotGuild(event.getGuild().getId());
-                                TextChannel channel;
-                                if (guild.votePostChannelID.equals("")) {
-                                    channel = event.getChannel();
-                                } else {
-                                    channel = SylkBot.getBot().jda.getTextChannelById(guild.votePostChannelID);
-                                }
-
-                                channel.sendMessage(voteDisplay.build()).queue(m -> {
-                                    m.addReaction("U+1F44D").queue();
-                                    m.addReaction("U+1F44E").queue();
-                                    m.addReaction("U+270B").queue();
-
-                                    v.messageID = m.getId();
-                                    v.channelID = m.getChannel().getId();
-                                });
+                                v.post(event.getAuthor().getId(), event.getChannel().getId());
                                 break;
 
                             case "testmode":
