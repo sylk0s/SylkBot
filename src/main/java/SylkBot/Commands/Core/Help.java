@@ -1,11 +1,15 @@
 package SylkBot.Commands.Core;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.Commands.Command;
 
 import SylkBot.Permissons.PermType;
 import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
+import java.util.List;
 
 public class Help extends Command {
 
@@ -38,6 +42,35 @@ public class Help extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
+        EmbedBuilder help = new EmbedBuilder();
+        if(args.length < 2) {
+            help.setTitle("SylkBot Help: ");
+            help.setDescription("For help with a specific command, use .help [command]");
+            List<Role> roleList = event.getGuild().getMember(event.getAuthor()).getRoles();
+            for(Command command : SylkBot.getBot().commands) {
+                if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(roleList, command)) {
+                    help.addField(command.getTrigger(), command.getHelpInfo(), false);
+                }
+            }
+        } else {
+            Command command = getCommandFromTrigger(args[1]);
+            if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(), command)){
+                help.setTitle(command.getTrigger());
+                help.setDescription(command.getHelpInfo());
+            }
+        }
+
+        event.getChannel().sendMessage(help.build()).queue();
+    }
+
+    private static Command getCommandFromTrigger(String trigger) {
+        for(Command command : SylkBot.getBot().commands) {
+            if(command.getTrigger().equals(trigger)) return command;
+        }
+        return null;
+    }
+    /*
+
         if (args.length < 2) {
             EmbedBuilder help = new EmbedBuilder();
             help.setTitle("SylkBot Help");
@@ -65,5 +98,6 @@ public class Help extends Command {
                 }
             }
         }
-    }
+     */
+
 }

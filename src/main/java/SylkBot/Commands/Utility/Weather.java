@@ -9,7 +9,7 @@ import org.json.JSONObject;
 public class Weather extends APICommand {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Kinda broken tells weather";
     }
 
     @Override

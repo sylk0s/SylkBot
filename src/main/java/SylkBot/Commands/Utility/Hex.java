@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Hex extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Shows the color for a hex value";
     }
 
     @Override

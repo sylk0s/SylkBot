@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class VoteList extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Lists current votes.";
     }
 
     @Override

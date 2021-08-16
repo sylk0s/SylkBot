@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class BotGuildConfigsTest extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Dev command... dont use lol";
     }
 
     @Override

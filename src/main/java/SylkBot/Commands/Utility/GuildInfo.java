@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class GuildInfo extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Gives info about current server";
     }
 
     @Override

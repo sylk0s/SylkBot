@@ -46,6 +46,7 @@ public class VoteTrigger extends Command {
                     event.getGuild().getId()
                     );
             newVote.deleteList.add(event.getMessage().getId());
+            newVote.setTime(0, 1);
             event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle() + "\nVote ID: " + newVote.id + "\nUse this to reference votes in future commands.").build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
             BotGuild g = BotGuild.getBotGuild(event.getGuild().getId());

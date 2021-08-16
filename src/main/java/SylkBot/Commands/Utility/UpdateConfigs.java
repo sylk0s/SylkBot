@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class UpdateConfigs extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "Dev tool dont use";
     }
 
     @Override

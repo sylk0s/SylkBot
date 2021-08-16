@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class GuildSetup extends Command {
     @Override
     public String getHelpInfo() {
-        return null;
+        return "fancy guild setup thing dont use pls";
     }
 
     @Override
