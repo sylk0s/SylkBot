@@ -1,6 +1,3 @@
 # SylkBot
 
-Discord bot written using Java Discord API. 
-Still under development. 
-I need to stop being dumb and take the wolfram files out of the bot code. 
-Also still figuring out how to use github. 
+Hi! This is my oldest project currently. At the moment it's the end of the summer and I want to have something that works for personal use... The code is kinda sketchy but everything works up to a certain standard. Theres still a lot of stuff I'd like to do with this, however I'm not really sure how to continue ATM. The base for this code was wirtten almost a year ago when I was much less knowledgable about programming in general. I could either a) rewirite this in java or b) do it in python which would be way easier. I think I may try to develop a better core in the future and make it as modular as possible so I can quickly code bots using it as they are needed.
