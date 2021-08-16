@@ -1,5 +1,6 @@
 package SylkBot.Commands.Utility;
 
+import SylkBot.BotObjects.BotGuild;
 import SylkBot.BotObjects.ChannelLink;
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
@@ -38,9 +39,8 @@ public class ChannelLinkTrigger extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        TextChannel c1 = SylkBot.getBot().jda.getTextChannelById(args[1]);
-        TextChannel c2 = SylkBot.getBot().jda.getTextChannelById(args[2]);
-
-        ChannelLink.createLink(c1,c2);
+        String[] link = {args[1],args[2]};
+        BotGuild.getBotGuild(event.getGuild().getId()).addLink(link);
+        ChannelLink.createLink(args[1], args[2]);
     }
 }

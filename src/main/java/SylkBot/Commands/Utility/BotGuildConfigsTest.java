@@ -29,7 +29,7 @@ public class BotGuildConfigsTest extends Command {
 
     @Override
     public Category getCategory() {
-        return null;
+        return Category.UTILITY;
     }
 
     @Override

@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 public class ChannelLink extends ListenerAdapter {
 
     //there is DEFINITLY some extranious code in here that's a result of me trying to get this working. I'm just gonna leave ti for now because its not really hurting anything.
+    //oh also! this can definitly be abused over multiple server (ie uses the bot to spam or access a secret channel)... i should fix this but probably wont
 
     TextChannel c1;
     TextChannel c2;
@@ -22,8 +23,11 @@ public class ChannelLink extends ListenerAdapter {
         c2.sendMessage("link established 2").queue();
     }
 
-    public static void createLink(TextChannel l1, TextChannel l2) {
-        SylkBot.getBot().jda.addEventListener(new ChannelLink(l1,l2));
+    public static void createLink(String l1, String l2) {
+        TextChannel c1 = SylkBot.getBot().jda.getTextChannelById(l1);
+        TextChannel c2 = SylkBot.getBot().jda.getTextChannelById(l2);
+
+        SylkBot.getBot().jda.addEventListener(new ChannelLink(c1,c2));
     }
 
     @Override

@@ -35,6 +35,7 @@ public class BotGuild extends Config {
     public ArrayList<Vote> tempVotes = new ArrayList<>();
 
     @Expose public ArrayList<String[]> t4vLinks = new ArrayList<>();
+    @Expose public ArrayList<String[]> chatLinks = new ArrayList<>();
 
     @Expose public long uniqueIDCount = 0;
 
@@ -111,6 +112,11 @@ public class BotGuild extends Config {
         this.saveObject();
     }
 
+    public void addLink(String[] link) {
+        this.chatLinks.add(link);
+        this.saveObject();
+    }
+
     public Guild getGuild() {
         return SylkBot.getBot().jda.getGuildById(this.guildID);
     }
@@ -135,25 +141,15 @@ public class BotGuild extends Config {
         return null;
     }
 
-    private boolean permSet() {
-        if(this.adminRoleID.equals("")) return false;
-        if(this.modRoleID.equals("")) return false;
-        if(this.everyoneRoleID.equals("")) return false;
-        if(this.restrictedRoleID.equals("")) return false;
-        if(this.bannedRoleID.equals("")) return false;
-        return true;
-    }
-
     public boolean roleCheck(List<Role> roles, Command command) {
-        if(!permSet()) { return true; } else {
-            for (Role role : roles) {
-                if (getPerm(role) != null) {
-                    if (getPerm(role).ordinal() >= command.getPermLevel().ordinal()) {
-                        return true;
-                    }
+        for (Role role : roles) {
+            if (getPerm(role) != null) {
+                if (getPerm(role).ordinal() >= command.getPermLevel().ordinal()) {
+                    return true;
                 }
             }
         }
+        if (this.everyoneRoleID.equals("")) return true;
         return false;
     }
 

@@ -29,7 +29,7 @@ public class Weather extends APICommand {
 
     @Override
     public Category getCategory() {
-        return null;
+        return Category.UTILITY;
     }
 
     @Override

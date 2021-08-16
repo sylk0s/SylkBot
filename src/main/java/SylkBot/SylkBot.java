@@ -1,6 +1,7 @@
 package SylkBot;
 
 import SylkBot.BotObjects.BotGuild;
+import SylkBot.BotObjects.ChannelLink;
 import SylkBot.BotObjects.JoinLeave;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
@@ -72,7 +73,7 @@ public class SylkBot extends ListenerAdapter {
         this.guilds = new ArrayList<>();
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         for(Guild guild : getBot().jda.getGuilds()) {
-            BotGuild g = new BotGuild();
+            BotGuild g =new BotGuild();
             g.guildID = guild.getId();
             guilds.add((BotGuild) BotGuild.setup(g));
 
@@ -81,6 +82,9 @@ public class SylkBot extends ListenerAdapter {
         this.guilds.forEach(g -> {
             g.votes.forEach(v -> {
                 v.post(LocalDateTime.parse(v.stringEndTime));
+            });
+            g.chatLinks.forEach(l -> {
+                ChannelLink.createLink(l[0],l[1]);
             });
         });
 
@@ -123,6 +127,7 @@ public class SylkBot extends ListenerAdapter {
         register(new BotGuildConfigsTest());
         register(new ChannelLinkTrigger());
         register(new CTranslate());
+        register(new GuildInfo());
         register(new Hex());
         register(new InfoProbe());
         register(new TranslateTo());

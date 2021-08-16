@@ -81,6 +81,11 @@ public class VoteTrigger extends Command {
                                 v.setTime(0, 1);
                                 break;
 
+                            case "cancel":
+                                v.cancel();
+                                event.getMessage().delete().queue();
+                                break;
+
                             default:
                                 event.getChannel().sendMessage("not a command").queue(); //todo as an error
                         }

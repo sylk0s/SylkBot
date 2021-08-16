@@ -59,10 +59,10 @@ public class Vote {
                 int voters = this.yesVote + this.noVote;
 
                 String status;
-                int fractionRequired = 2;
+                float fractionRequired = 0.5f;
 
                 EmbedBuilder result = new EmbedBuilder();
-                if((voters - this.yesVote) >= 0) { //this logic is super easy but i need to rewrite... i think this causes an error
+                if(this.yesVote >= voters * fractionRequired) { //this logic is super easy but i need to rewrite... i think this causes an error
                     status = "Vote Passed!";
                     result.setColor(0x00FF00);
                 } else {
@@ -175,6 +175,7 @@ public class Vote {
         if(timer != null) {
             this.timer.cancel();
             BotGuild.getBotGuild(guildID).votes.remove(this.getTitle());
+            SylkBot.getBot().jda.getTextChannelById(this.channelID).retrieveMessageById(this.messageID).queue(m -> {m.delete().queue();});
         } else {
             //do something?
         }
