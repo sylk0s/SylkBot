@@ -2,13 +2,13 @@ package SylkBot.Commands.Utility;
 
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class InfoProbe extends Command {
     @Override
     public String getHelpInfo() {
-        return "Debug tool";
+        return "Debug tool... dont use lol\n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + "`";
     }
 
     @Override

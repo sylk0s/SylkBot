@@ -9,7 +9,8 @@ public class Skin extends Command {
 
     @Override
     public String getHelpInfo() {
-        return "Get the skin for a player";
+        return "Get the skin for a minecraft account.\n" +
+        " `" + this.bot.configs.prefix + this.getTrigger() + " [username] `";
     }
 
     @Override

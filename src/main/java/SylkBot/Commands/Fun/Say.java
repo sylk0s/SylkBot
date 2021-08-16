@@ -7,7 +7,8 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class Say extends Command {
     @Override
     public String getHelpInfo() {
-        return "makes the bot say stuff";
+        return "makes the bot say stuff (pls don't make my bot say mean things)\n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [phrase/string] `";
     }
 
     @Override

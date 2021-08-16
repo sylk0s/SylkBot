@@ -2,12 +2,14 @@ package SylkBot.Commands.Fun;
 
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
+import SylkBot.SylkBot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class Hello extends Command {
     @Override
     public String getHelpInfo() {
-        return "greets you";
+        return "Greets you! \n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + "`";
     }
 
     @Override

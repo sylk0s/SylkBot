@@ -20,11 +20,15 @@ public abstract class Command extends ListenerAdapter {
 
     public abstract void run(String[] args, GuildMessageReceivedEvent event);
 
+    protected SylkBot bot = SylkBot.getBot();
+    protected BotGuild eventBotGuild;
+
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
         String[] args = event.getMessage().getContentRaw().split("\\s+");
+        this.eventBotGuild = BotGuild.getBotGuild(event.getGuild().getId());
         if (args[0].equalsIgnoreCase(SylkBot.getBot().configs.prefix + this.getTrigger())) {
-            if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(),this)) {
+            if(eventBotGuild.roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(),this)) {
                 if (args.length < 2 && !hasNoArgs()) {
                     NoArgsError error = new NoArgsError();
                     error.outputError(event);

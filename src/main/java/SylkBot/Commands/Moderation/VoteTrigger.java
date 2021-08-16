@@ -1,20 +1,18 @@
 package SylkBot.Commands.Moderation;
 
-import SylkBot.BotObjects.BotGuild;
 import SylkBot.BotObjects.Vote;
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import org.w3c.dom.Text;
 
 public class VoteTrigger extends Command {
     @Override
     public String getHelpInfo() {
-        return "Use to make votes";
+        return "Use to make votes. \n" +
+                "`To create a vote: " + this.bot.configs.prefix + this.getTrigger() + " [create] [name of vote]` \n" +
+                " This will return a vote ID which should be used to modify and post the vote. \n" +
+                "`" + this.bot.configs.prefix + this.getTrigger() + " [vote id] [setDescription/delete/time/post/cancel] {time -> [hours] [minutes]} {setDescription -> [description]}`";
     }
 
     @Override
@@ -40,8 +38,7 @@ public class VoteTrigger extends Command {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         if (args[1].equals("create")) {
-            Vote newVote = new Vote(BotGuild.getBotGuild(
-                    event.getGuild().getId()).getUniqueID(),
+            Vote newVote = new Vote(this.eventBotGuild.getUniqueID(),
                     event.getMessage().getContentRaw().substring(13),
                     event.getGuild().getId()
                     );
@@ -49,8 +46,7 @@ public class VoteTrigger extends Command {
             newVote.setTime(0, 1);
             event.getChannel().sendMessage(new EmbedBuilder().setTitle("Vote created: ").setDescription(newVote.getTitle() + "\nVote ID: " + newVote.id + "\nUse this to reference votes in future commands.").build()).queue(m -> newVote.deleteList.add(m.getId()));
         } else {
-            BotGuild g = BotGuild.getBotGuild(event.getGuild().getId());
-            for(Vote v : g.tempVotes) {
+            for(Vote v : this.eventBotGuild.tempVotes) {
                 if (v.getId() == Long.parseLong(args[1])) {
                     v.deleteList.add(event.getMessage().getId());
                     switch (args[2]) {
@@ -63,7 +59,7 @@ public class VoteTrigger extends Command {
                                 for (String id : v.deleteList) {
                                     event.getChannel().deleteMessageById(id).queue();
                                 }
-                                g.tempVotes.remove(v);
+                                this.eventBotGuild.tempVotes.remove(v);
                                 break;
 
                             case "time":

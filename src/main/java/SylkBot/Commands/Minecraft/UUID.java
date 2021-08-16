@@ -9,7 +9,8 @@ public class UUID extends Command {
 
     @Override
     public String getHelpInfo() {
-        return "Input player name and this command will give the UUID";
+        return "Input minecraft username and this command will give the UUID. \n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [username] `";
     }
 
     @Override

@@ -19,7 +19,8 @@ public class Clear extends Command {
 
     @Override
     public String getHelpInfo() {
-        return " [value < 100] Will delete up to 100 messages from a channel\n";
+        return " Will delete **n** latest messages from the channel. \n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [2 < value < 100]`";
     }
 
     @Override

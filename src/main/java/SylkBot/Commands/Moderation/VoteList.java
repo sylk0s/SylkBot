@@ -1,16 +1,15 @@
 package SylkBot.Commands.Moderation;
 
-import SylkBot.BotObjects.BotGuild;
 import SylkBot.Commands.Command;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class VoteList extends Command {
     @Override
     public String getHelpInfo() {
-        return "Lists current votes.";
+        return "Lists current votes active in the server.\n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + "`";
     }
 
     @Override
@@ -37,7 +36,7 @@ public class VoteList extends Command {
     public void run(String[] args, GuildMessageReceivedEvent event) {
         EmbedBuilder votes = new EmbedBuilder();
         votes.setTitle("Vote List");
-        SylkBot.getBot().guilds.forEach(g -> {
+        this.bot.guilds.forEach(g -> {
             g.votes.forEach(v -> {
                 votes.addField(v.getTitle(),v.getDescription(),false);
             });

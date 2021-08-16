@@ -21,7 +21,8 @@ public class TeamInfo extends APICommand {
 
     @Override
     public String getHelpInfo() {
-        return "gives various bits of info on FRC teams";
+        return "Gives various bits of info on FRC teams\n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + "[team number]`";
     }
 
     @Override

@@ -9,7 +9,8 @@ import org.json.JSONObject;
 public class Weather extends APICommand {
     @Override
     public String getHelpInfo() {
-        return "Kinda broken tells weather";
+        return "Kinda broken but tells weather\n"+
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [location]`";
     }
 
     @Override

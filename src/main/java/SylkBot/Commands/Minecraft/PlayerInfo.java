@@ -11,7 +11,8 @@ import java.util.Map;
 public class PlayerInfo extends Command {
     @Override
     public String getHelpInfo() {
-        return " get basic info about a minecraft account";
+        return "Get some basic info about a Minecraft account. \n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [username] `";
     }
 
     @Override

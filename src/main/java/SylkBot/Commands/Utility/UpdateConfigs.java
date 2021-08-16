@@ -3,13 +3,13 @@ package SylkBot.Commands.Utility;
 import SylkBot.Commands.Command;
 import SylkBot.Configs.Config;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class UpdateConfigs extends Command {
     @Override
     public String getHelpInfo() {
-        return "Dev tool dont use";
+        return "Updates all config files manually. \n"+
+                " `" + this.bot.configs.prefix + this.getTrigger() + "`";
     }
 
     @Override
@@ -34,7 +34,7 @@ public class UpdateConfigs extends Command {
 
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
-        SylkBot.getBot().guilds.forEach(Config::saveObject);
-        SylkBot.getBot().configs.saveObject();
+        this.bot.guilds.forEach(Config::saveObject);
+        this.bot.configs.saveObject();
     }
 }

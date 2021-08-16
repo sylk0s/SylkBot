@@ -1,10 +1,8 @@
 package SylkBot.Commands.Core;
 
-import SylkBot.BotObjects.BotGuild;
 import SylkBot.Commands.Command;
 
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -20,8 +18,8 @@ public class Help extends Command {
 
     @Override
     public String getHelpInfo() {
-        return " Use to show all commands \n" +
-                " `[command] Use to get help with a specific command`\n";
+        return " Use to show all commands \n" + "For help with a specific command: \n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [command] `";
     }
 
     @Override
@@ -43,18 +41,19 @@ public class Help extends Command {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         EmbedBuilder help = new EmbedBuilder();
+        help.setColor(0xff97cb);
         if(args.length < 2) {
             help.setTitle("SylkBot Help: ");
             help.setDescription("For help with a specific command, use .help [command]");
             List<Role> roleList = event.getGuild().getMember(event.getAuthor()).getRoles();
-            for(Command command : SylkBot.getBot().commands) {
-                if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(roleList, command)) {
+            for(Command command : this.bot.commands) {
+                if(this.eventBotGuild.roleCheck(roleList, command)) {
                     help.addField(command.getTrigger(), command.getHelpInfo(), false);
                 }
             }
         } else {
             Command command = getCommandFromTrigger(args[1]);
-            if(BotGuild.getBotGuild(event.getGuild().getId()).roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(), command)){
+            if(this.eventBotGuild.roleCheck(event.getGuild().getMember(event.getAuthor()).getRoles(), command)){
                 help.setTitle(command.getTrigger());
                 help.setDescription(command.getHelpInfo());
             }
@@ -63,8 +62,8 @@ public class Help extends Command {
         event.getChannel().sendMessage(help.build()).queue();
     }
 
-    private static Command getCommandFromTrigger(String trigger) {
-        for(Command command : SylkBot.getBot().commands) {
+    private Command getCommandFromTrigger(String trigger) {
+        for(Command command : this.bot.commands) {
             if(command.getTrigger().equals(trigger)) return command;
         }
         return null;

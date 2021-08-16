@@ -16,6 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Vote {
+    public SylkBot bot;
 
     public LocalDateTime endTime;
     @Expose public long id;
@@ -42,11 +43,12 @@ public class Vote {
         this.description = "";
         deleteList = new ArrayList<>();
         BotGuild.getBotGuild(this.guildID).tempVotes.add(this);
+        this.bot = SylkBot.getBot();
     }
 
     public void endVote() {
         //to do this i need guild configs
-        TextChannel channel = SylkBot.getBot().jda.getTextChannelById(this.channelID);
+        TextChannel channel = this.bot.jda.getTextChannelById(this.channelID);
 
         channel.retrieveMessageById(this.messageID).queue(m -> {
             m.getReactions().forEach(r -> {
@@ -55,7 +57,7 @@ public class Vote {
                 if(r.getReactionEmote().getAsCodepoints().equalsIgnoreCase("U+270B"))  { this.setAbs(r.getCount() - 1); }
             });
 
-            SylkBot.getBot().jda.retrieveUserById(this.authorID).queue(user -> {
+            this.bot.jda.retrieveUserById(this.authorID).queue(user -> {
                 int voters = this.yesVote + this.noVote;
 
                 String status;
@@ -82,7 +84,7 @@ public class Vote {
                 if(guild.voteResultChannelID.equals("")) {
                     channel1 = m.getChannel();
                 } else {
-                    channel1 = SylkBot.getBot().jda.getTextChannelById(guild.voteResultChannelID);
+                    channel1 = this.bot.jda.getTextChannelById(guild.voteResultChannelID);
                 }
                 channel1.sendMessage(result.build()).queue();
                 m.delete().queue();
@@ -126,7 +128,7 @@ public class Vote {
 
         EmbedBuilder voteDisplay = new EmbedBuilder();
 
-        User author = SylkBot.getBot().jda.getUserById(authorID);
+        User author = this.bot.jda.getUserById(authorID);
 
         voteDisplay.setTitle(this.getTitle());
         voteDisplay.setDescription(this.getDescription());
@@ -136,9 +138,9 @@ public class Vote {
         BotGuild guild = BotGuild.getBotGuild(guildID);
         TextChannel channel;
         if (guild.votePostChannelID.equals("")) {
-            channel = SylkBot.getBot().jda.getTextChannelById(sentInID);
+            channel = this.bot.jda.getTextChannelById(sentInID);
         } else {
-            channel = SylkBot.getBot().jda.getTextChannelById(guild.votePostChannelID);
+            channel = this.bot.jda.getTextChannelById(guild.votePostChannelID);
         }
 
         channel.sendMessage(voteDisplay.build()).queue(m -> {
@@ -175,7 +177,7 @@ public class Vote {
         if(timer != null) {
             this.timer.cancel();
             BotGuild.getBotGuild(guildID).votes.remove(this.getTitle());
-            SylkBot.getBot().jda.getTextChannelById(this.channelID).retrieveMessageById(this.messageID).queue(m -> {m.delete().queue();});
+            this.bot.jda.getTextChannelById(this.channelID).retrieveMessageById(this.messageID).queue(m -> {m.delete().queue();});
         } else {
             //do something?
         }

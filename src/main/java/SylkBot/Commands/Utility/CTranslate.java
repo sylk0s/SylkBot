@@ -2,7 +2,6 @@ package SylkBot.Commands.Utility;
 
 import SylkBot.Commands.APICommand;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import com.google.cloud.translate.Detection;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
@@ -13,7 +12,8 @@ public class CTranslate extends APICommand {
 
     @Override
     public String getHelpInfo() {
-        return "translate any text to english";
+        return "Translate any text to english\n" +
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [text to translate]`";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CTranslate extends APICommand {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
         String text = event.getMessage().getContentRaw().replace(".translate ","");
-        Translate translate = TranslateOptions.newBuilder().setApiKey(SylkBot.getBot().configs.googleToken).build().getService();
+        Translate translate = TranslateOptions.newBuilder().setApiKey(this.bot.configs.googleToken).build().getService();
         Detection detection = translate.detect(text);
         String lang = detection.getLanguage();
         Translation translation = translate.translate(text, Translate.TranslateOption.sourceLanguage(lang), Translate.TranslateOption.targetLanguage("en"));

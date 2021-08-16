@@ -2,17 +2,15 @@ package SylkBot.Commands.Utility;
 
 import SylkBot.Commands.APICommand;
 import SylkBot.Permissons.PermType;
-import SylkBot.SylkBot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.Objects;
-
 public class UserInfo extends APICommand {
     @Override
     public String getHelpInfo() {
-        return "get info about a discord account";
+        return "Get info about a discord user\n"+
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [user id]`";
     }
 
     @Override
@@ -38,7 +36,7 @@ public class UserInfo extends APICommand {
     @Override
     public void run(String[] args, GuildMessageReceivedEvent event) {
 
-        SylkBot.getBot().jda.retrieveUserById(args[1]).queue(user -> {
+        this.bot.jda.retrieveUserById(args[1]).queue(user -> {
             EmbedBuilder info = new EmbedBuilder();
             info.setTitle(user.getName() + "#" + user.getDiscriminator());
             info.setThumbnail(user.getEffectiveAvatarUrl());
@@ -46,14 +44,13 @@ public class UserInfo extends APICommand {
 
             info.addField("User ID: ", user.getId(),false);
             info.addField("Account created on: ", user.getTimeCreated().toString(), true);
-            info.addField("Joined server on: ", SylkBot.getBot().jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getTimeJoined().toString(),true);
-            if (SylkBot.getBot().jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getNickname() != null) {
-                info.addField("Nickname: ", SylkBot.getBot().jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getNickname(), false);
+            info.addField("Joined server on: ", this.bot.jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getTimeJoined().toString(),true);
+            if (this.bot.jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getNickname() != null) {
+                info.addField("Nickname: ", this.bot.jda.getGuildById(event.getGuild().getId()).getMemberById(args[1]).getNickname(), false);
             }
             info.setColor(0x4e5d94);
 
             //sometime i want to add more to this embed
-
             event.getChannel().sendMessage(info.build()).queue();
         });
 

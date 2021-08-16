@@ -14,7 +14,8 @@ import java.io.IOException;
 public class Hex extends Command {
     @Override
     public String getHelpInfo() {
-        return "Shows the color for a hex value";
+        return "Shows the color for a hex value.\n"+
+                " `" + this.bot.configs.prefix + this.getTrigger() + " [6 digit hex code]`";
     }
 
     @Override
